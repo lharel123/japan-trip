@@ -403,6 +403,72 @@
   #scroll-top.visible { opacity: 1; pointer-events: all; }
   #scroll-top:hover { transform: translateY(-2px); }
 
+  /* ─── GUIDE TAB ─── */
+  .guide-section {
+    margin-bottom: 16px;
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid rgba(212,168,83,0.15);
+    overflow: hidden;
+  }
+  .guide-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 16px;
+    cursor: pointer;
+    font-weight: 600; font-size: 15px;
+    color: var(--gold2);
+    user-select: none;
+  }
+  .guide-header:active { background: rgba(255,255,255,0.03); }
+  .guide-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease;
+    padding: 0 16px;
+    font-size: 13.5px; line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+  }
+  .guide-body.open { max-height: 2000px; padding: 0 16px 16px; }
+  .guide-body p { margin: 6px 0; }
+  .guide-body strong { color: var(--gold2); }
+  .guide-body .note {
+    background: rgba(212,168,83,0.08);
+    border-right: 3px solid var(--gold);
+    border-radius: 4px; padding: 8px 10px; margin: 8px 0;
+    font-size: 13px;
+  }
+  /* Shopping table */
+  .shop-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12.5px; }
+  .shop-table th {
+    background: rgba(212,168,83,0.12); color: var(--gold2);
+    padding: 7px 8px; text-align: right; font-weight: 600;
+    border-bottom: 1px solid rgba(212,168,83,0.2);
+  }
+  .shop-table td { padding: 7px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
+  .shop-table tr:last-child td { border-bottom: none; }
+  /* Hotel cards */
+  .hotel-card {
+    background: var(--card2); border-radius: 8px;
+    padding: 10px 12px; margin: 8px 0;
+    border: 1px solid rgba(212,168,83,0.1);
+  }
+  .hotel-name { font-weight: 600; color: var(--gold2); font-size: 14px; }
+  .hotel-meta { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 2px; }
+  .hotel-pick { color: #7dff9f; font-size: 11.5px; font-weight: 600; margin-top: 3px; }
+  /* Checklist */
+  .check-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13.5px;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0;
+    border: 2px solid var(--gold); cursor: pointer; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .check-box.checked { background: var(--gold); color: var(--navy); font-size: 12px; }
+
   /* ─── RESPONSIVE ─── */
   @media (min-width: 600px) {
     .hero { padding: 60px 40px 40px; }
@@ -449,9 +515,10 @@
         <div class="booking-item">Shibuya Sky — כרטיס לשעת שקיעה</div>
         <div class="booking-item">Ghibli Museum — כרטיסים נחטפים חודש מראש!</div>
         <div class="booking-item">Nintendo Museum (אוג׳י) — הגרלה/הזמנה מראש</div>
-        <div class="booking-item">אטרקציה גדולה ביום 9: דיסני / הארי פוטר / גיבלי</div>
-        <div class="booking-item">מסעדות סושי ויוקיניקו ברמה גבוהה</div>
-        <div class="booking-item">שינקנסן טוקיו↔קיוטו — JR Pass או כרטיס בודד</div>
+        <div class="booking-item">אטרקציה גדולה ביום 9: דיסני / הארי פוטר / גיבלי / Puroland</div>
+        <div class="booking-item">KIMONO TEA CEREMONY MAIKOYA — טוקיו או קיוטו</div>
+        <div class="booking-item">מסעדות אומקסה: SÉZANNE · Hakkoku · Kobe Beef Mouriya · ועוד</div>
+        <div class="booking-item">שינקנסן טוקיו↔קיוטו — SmartEX (לא JR Pass!)</div>
       </div>
     </div>
   </div>
@@ -481,7 +548,7 @@
     <div class="tips-body">
       <p>☔ סוף יוני = עונת הגשמים. קחו מטרייה מתקפלת; יש גיבוי "מקורה" לכל יום.</p>
       <p>🎟️ חובה להזמין מראש: teamLab Planets, מוזיאון גיבלי, דיסני, Nintendo Museum, Shibuya Sky, ומסעדות סושי/יוקיניקו יוקרתיות.</p>
-      <p>🚄 שינקנסן טוקיו↔קיוטו ≈ 2 שעות 15 דק'. כדאי JR Pass או כרטיס בודד מראש.</p>
+      <p>🚄 שינקנסן טוקיו↔קיוטו ≈ 2:15. <strong>לא לקנות JR Pass</strong> — קנו כרטיס בודד דרך SmartEX.</p>
       <p>📍 כל המקומות נמצאים במפה — נווטו ישירות מ-Google Maps.</p>
       <p>💳 Suica/Pasmo בנייד לכל הרכבות; רוב היעדים 10–25 דק' ברכבת מהבסיס בשיבויה/שינג׳וקו.</p>
     </div>
@@ -492,6 +559,7 @@
     <button class="tab-btn active" onclick="showSection('tokyo1', this)">🏙️ טוקיו חלק 1</button>
     <button class="tab-btn" onclick="showSection('kyoto', this)">⛩️ קיוטו</button>
     <button class="tab-btn" onclick="showSection('tokyo2', this)">🏙️ טוקיו חלק 2</button>
+    <button class="tab-btn" onclick="showSection('guide', this)">📖 מדריך</button>
   </div>
 
   <!-- ══ TOKYO 1 ══ -->
@@ -537,7 +605,7 @@
           <div class="time-block">
             <div class="time-label">🌙 ערב</div>
             <div class="time-items">
-              <div class="item food">🍖 <a href="https://maps.google.com/search?q=Gyukatsu+Kyoto+Katsugyu+Dogenzaka+Shibuya+Tokyo+Japan" target="_blank">Gyukatsu Kyoto Katsugyu</a> (Dogenzaka) או <a href="https://maps.google.com/search?q=Han+no+daidokoro+bettei+shibuya+Tokyo+Japan" target="_blank">Han no daidokoro bettei shibuya</a></div>
+              <div class="item food">🍖 <a href="https://maps.google.com/search?q=Gyukatsu+Kyoto+Katsugyu+Dogenzaka+Shibuya+Tokyo+Japan" target="_blank">Gyukatsu Kyoto Katsugyu</a> (Dogenzaka)</div>
               <div class="item night">🍸 <a href="https://maps.google.com/search?q=THE+MUSIC+BAR+CAVE+SHIBUYA+Tokyo+Japan" target="_blank">THE MUSIC BAR -CAVE SHIBUYA-</a></div>
               <div class="item drink">🍩 קינוח: <a href="https://maps.google.com/search?q=I%27m+donut+Shibuya+Tokyo+Japan" target="_blank">I'm donut? SHIBUYA</a></div>
             </div>
@@ -626,7 +694,7 @@
             <div class="time-items">
               <div class="item"><a href="https://maps.google.com/search?q=GINZA+SIX+Tokyo+Japan" target="_blank">GINZA SIX</a> · <a href="https://maps.google.com/search?q=Uniqlo+Ginza+Flagship+Tokyo+Japan" target="_blank">Uniqlo Ginza Flagship</a> · <a href="https://maps.google.com/search?q=MUJI+Ginza+Flagship+Tokyo+Japan" target="_blank">MUJI Ginza</a></div>
               <div class="item"><a href="https://maps.google.com/search?q=Mitsukoshi+Ginza+Tokyo+Japan" target="_blank">Mitsukoshi Ginza</a> · <a href="https://maps.google.com/search?q=Ippodo+Tea+Ginza+Tokyo+Japan" target="_blank">Ippodo Tea</a> · <a href="https://maps.google.com/search?q=ART+AQUARIUM+MUSEUM+Ginza+Tokyo+Japan" target="_blank">ART AQUARIUM MUSEUM</a></div>
-              <div class="item drink">☕ <a href="https://maps.google.com/search?q=Glitch+Coffee+GINZA+Tokyo+Japan" target="_blank">Glitch Coffee GINZA</a> · <a href="https://maps.google.com/search?q=X+coffee+GINZA+Tokyo+Japan" target="_blank">X coffee GINZA</a></div>
+              <div class="item drink">☕ <a href="https://maps.google.com/search?q=Glitch+Coffee+GINZA+Tokyo+Japan" target="_blank">Glitch Coffee GINZA</a></div>
             </div>
           </div>
           <div class="time-block">
@@ -706,7 +774,7 @@
               <div class="item highlight"><a href="https://maps.google.com/search?q=Kiyomizudera+Kyoto+Japan" target="_blank">Kiyomizu-dera</a> — מקדש המפורסם 🏯</div>
               <div class="item"><a href="https://maps.google.com/search?q=Sannenzaka+Kyoto+Japan" target="_blank">Sannenzaka</a> / <a href="https://maps.google.com/search?q=Ninenzaka+Kyoto+Japan" target="_blank">Ninenzaka</a> — סמטאות עתיקות 🏮</div>
               <div class="item"><a href="https://maps.google.com/search?q=Yasaka+Shrine+Kyoto+Japan" target="_blank">Yasaka Shrine</a></div>
-              <div class="item drink">🍵 <a href="https://maps.google.com/search?q=Starbucks+Ninenzaka+Kyoto+Japan" target="_blank">Starbucks Ninenzaka</a> (במבנה מסורתית) · <a href="https://maps.google.com/search?q=%25+ARABICA+Kyoto+Japan" target="_blank">% ARABICA</a> · <a href="https://maps.google.com/search?q=Maccha+House+Kyoto+Japan" target="_blank">Maccha House</a></div>
+              <div class="item drink">🍵 <a href="https://maps.google.com/search?q=Starbucks+Ninenzaka+Kyoto+Japan" target="_blank">Starbucks Ninenzaka</a> · <a href="https://maps.google.com/search?q=%25+ARABICA+Kyoto+Japan" target="_blank">% ARABICA</a> · <a href="https://maps.google.com/search?q=Maccha+House+Kyoto+Japan" target="_blank">Maccha House</a></div>
             </div>
           </div>
           <div class="time-block">
@@ -741,10 +809,9 @@
           <div class="time-block">
             <div class="time-label">🌅 בוקר</div>
             <div class="time-items">
-              <div class="item highlight"><a href="https://maps.google.com/search?q=Arashiyama+Bamboo+Forest+Kyoto+Japan" target="_blank">Bamboo Forest</a> (ארשייאמה) — יער הבמבוק 🎋</div>
-              <div class="item"><a href="https://maps.google.com/search?q=Katsura+River+Arashiyama+Kyoto+Japan" target="_blank">Katsura River</a> · <a href="https://maps.google.com/search?q=Arashiyama+Monkey+Park+Iwatayama+Kyoto+Japan" target="_blank">Arashiyama Monkey Park Iwatayama</a> 🐒</div>
-              <div class="item"><a href="https://maps.google.com/search?q=Kimono+Forest+Arashiyama+Kyoto+Japan" target="_blank">Kimono Forest</a></div>
-              <div class="item drink">☕ <a href="https://maps.google.com/search?q=%25+ARABICA+Kyoto+Arashiyama+Japan" target="_blank">% ARABICA Kyoto Arashiyama</a> — נוף לנהר ☕</div>
+              <div class="item highlight"><a href="https://maps.google.com/search?q=Arashiyama+Bamboo+Forest+Kyoto+Japan" target="_blank">Bamboo Forest</a> — יער הבמבוק 🎋</div>
+              <div class="item"><a href="https://maps.google.com/search?q=Katsura+River+Arashiyama+Kyoto+Japan" target="_blank">Katsura River</a> · <a href="https://maps.google.com/search?q=Arashiyama+Monkey+Park+Iwatayama+Kyoto+Japan" target="_blank">Monkey Park Iwatayama</a> 🐒 · <a href="https://maps.google.com/search?q=Kimono+Forest+Arashiyama+Kyoto+Japan" target="_blank">Kimono Forest</a></div>
+              <div class="item drink">☕ <a href="https://maps.google.com/search?q=%25+ARABICA+Kyoto+Arashiyama+Japan" target="_blank">% ARABICA Arashiyama</a> — נוף לנהר</div>
             </div>
           </div>
           <div class="time-block">
@@ -851,7 +918,7 @@
           <div class="time-block">
             <div class="time-label">☀️ אחה"צ</div>
             <div class="time-items">
-              <div class="item highlight"><a href="https://maps.google.com/search?q=Tokyo+Tower+Japan" target="_blank">Tokyo Tower</a> 🗼 → <a href="https://maps.google.com/search?q=Zojoji+Temple+Tokyo+Japan" target="_blank">Zōjō-ji</a> (מקדש עם נוף למגדל)</div>
+              <div class="item highlight"><a href="https://maps.google.com/search?q=Tokyo+Tower+Japan" target="_blank">Tokyo Tower</a> 🗼 → <a href="https://maps.google.com/search?q=Zojoji+Temple+Tokyo+Japan" target="_blank">Zōjō-ji</a></div>
               <div class="item drink">☕ <a href="https://maps.google.com/search?q=%25ARABICA+Azabudai+Hills+Tokyo+Japan" target="_blank">%ARABICA Azabudai Hills</a></div>
             </div>
           </div>
@@ -882,28 +949,14 @@
           <div class="choice-note">⚠️ כולן דורשות הזמנה מראש — בחרו אחת!</div>
           <br>
           <div class="choice-grid">
-            <div class="choice-card">
-              🎢 <strong><a href="https://maps.google.com/search?q=Tokyo+Disneyland+DisneySea+Japan" target="_blank">Tokyo Disneyland / DisneySea</a></strong><br>
-              <span style="color:var(--muted);font-size:12px">יום שלם, צ'יבה</span>
-            </div>
-            <div class="choice-card">
-              🎬 <strong><a href="https://maps.google.com/search?q=Warner+Bros+Studio+Tour+Tokyo+Harry+Potter+Japan" target="_blank">The Making of Harry Potter</a></strong><br>
-              <span style="color:var(--muted);font-size:12px">Warner Bros Studio, נריא — חצי-יום+</span>
-            </div>
-            <div class="choice-card">
-              🎨 <strong><a href="https://maps.google.com/search?q=Ghibli+Museum+Mitaka+Tokyo+Japan" target="_blank">Ghibli Museum</a></strong><br>
-              <span style="color:var(--muted);font-size:12px">מיטקה — <span style="color:#ff9945">כרטיסים נחטפים חודש מראש!</span></span>
-            </div>
-            <div class="choice-card">
-              🎀 <strong><a href="https://maps.google.com/search?q=Sanrio+Puroland+Tokyo+Japan" target="_blank">Sanrio Puroland</a></strong><br>
-              <span style="color:var(--muted);font-size:12px">טאמה — Hello Kitty 🐱</span>
-            </div>
+            <div class="choice-card">🎢 <strong><a href="https://maps.google.com/search?q=Tokyo+Disneyland+DisneySea+Japan" target="_blank">Tokyo Disneyland / DisneySea</a></strong><br><span style="color:var(--muted);font-size:12px">יום שלם, צ'יבה</span></div>
+            <div class="choice-card">🎬 <strong><a href="https://maps.google.com/search?q=Warner+Bros+Studio+Tour+Tokyo+Harry+Potter+Japan" target="_blank">The Making of Harry Potter</a></strong><br><span style="color:var(--muted);font-size:12px">Warner Bros Studio, נריא — חצי-יום+</span></div>
+            <div class="choice-card">🎨 <strong><a href="https://maps.google.com/search?q=Ghibli+Museum+Mitaka+Tokyo+Japan" target="_blank">Ghibli Museum</a></strong><br><span style="color:var(--muted);font-size:12px">מיטקה — <span style="color:#ff9945">כרטיסים נחטפים חודש מראש!</span></span></div>
+            <div class="choice-card">🎀 <strong><a href="https://maps.google.com/search?q=Sanrio+Puroland+Tokyo+Japan" target="_blank">Sanrio Puroland</a></strong><br><span style="color:var(--muted);font-size:12px">טאמה — Hello Kitty 🐱</span></div>
           </div>
           <div class="time-block" style="margin-top:14px">
             <div class="time-label">🌙 ערב</div>
-            <div class="time-items">
-              <div class="item">חזרה לבסיס, ארוחה רגועה 😴</div>
-            </div>
+            <div class="time-items"><div class="item">חזרה לבסיס, ארוחה רגועה 😴</div></div>
           </div>
         </div>
       </div>
@@ -914,7 +967,7 @@
       <div class="day-header" onclick="toggleDay(this)">
         <div class="day-info">
           <div class="day-num">יום 10 · חמישי 2.7</div>
-          <div class="day-title-text">יום אחרון — מה שפספסתם + פרידה 🌸</div>
+          <div class="day-title-text">יום אחרון — קניות גדולות + פרידה 🌸</div>
         </div>
         <span class="day-chevron">▼</span>
       </div>
@@ -928,10 +981,10 @@
             </div>
           </div>
           <div class="time-block">
-            <div class="time-label">☀️ צהריים</div>
+            <div class="time-label">☀️ צהריים — קניות אחרונות!</div>
             <div class="time-items">
-              <div class="item"><a href="https://maps.google.com/search?q=Akihabara+Tokyo+Japan" target="_blank">Akihabara</a> לעומק 🎮</div>
-              <div class="item">או <a href="https://maps.google.com/search?q=Don+Quijote+Roppongi+Tokyo+Japan" target="_blank">Don Quijote</a> (Roppongi/שיבויה) לקניות אחרונות 🛍️</div>
+              <div class="item highlight">🛍️ <strong>היום למלא מזוודה!</strong> Don Quijote / Akihabara / Ginza</div>
+              <div class="item"><a href="https://maps.google.com/search?q=Akihabara+Tokyo+Japan" target="_blank">Akihabara</a> לעומק 🎮 · <a href="https://maps.google.com/search?q=Don+Quijote+Roppongi+Tokyo+Japan" target="_blank">Don Quijote</a> (Roppongi/שיבויה)</div>
             </div>
           </div>
           <div class="time-block">
@@ -947,34 +1000,116 @@
     </div>
   </div>
 
+  <!-- ══ GUIDE ══ -->
+  <div id="guide" class="section">
+    <div class="section-title">📖 מדריך מלא</div>
+
+    <div class="guide-section">
+      <div class="guide-header" onclick="toggleGuide(this)">
+        <span>🚆 רכבות — איך זזים</span>
+        <span style="color:var(--muted);font-size:18px;transition:transform 0.3s">▼</span>
+      </div>
+      <div class="guide-body">
+        <p><strong>מהשדה לטוקיו (נריטה NRT):</strong></p>
+        <p>• <strong>Narita Express (N'EX)</strong> — ישיר לשיבויה/שינג׳וקו (~75–90 דק'). יש כרטיס הלוך-ושוב לתיירים.</p>
+        <p>• חלופה זולה: <strong>Keisei Access Express</strong> לאואנו/אסקוסה.</p>
+        <p><strong>מהנדה (HND) — קרוב ומומלץ:</strong></p>
+        <p>• <strong>Keikyu Line</strong> לשינגאווה (~15 דק') ← Yamanote לשיבויה/שינג׳וקו.</p>
+        <p>• או <strong>Tokyo Monorail</strong> ← Yamanote.</p>
+        <br>
+        <p><strong>בתוך טוקיו:</strong></p>
+        <p>• 🟢 <strong>קו Yamanote (JR)</strong> — הלולאה שיבויה ↔ שינג׳וקו ↔ אואנו ↔ טוקיו ↔ שינגאווה.</p>
+        <p>• 🚇 <strong>Tokyo Metro + Toei</strong> — לגינזה, רופונגי, אסקוסה.</p>
+        <p>• 💳 <strong>Suica / PASMO</strong> — טוענים בארנק ה-iPhone (Apple Wallet). אין צורך בכרטיס פיזי.</p>
+        <br>
+        <p><strong>טוקיו ↔ קיוטו (שינקנסן):</strong></p>
+        <p>• <strong>Nozomi</strong> = הכי מהיר (~2:15) מתחנת Tokyo או Shinagawa.</p>
+        <div class="note">⚠️ <strong>לא לקנות JR Pass</strong> — לא משתלם (¥50,000 מול ~¥28,000 הלוך-חזור). קנו כרטיס בודד דרך <strong>SmartEX</strong> ושמרו מקום מראש.</div>
+        <p><strong>בתוך קיוטו:</strong></p>
+        <p>• 🚌 אוטובוס + 🚇 סאבוויי (Karasuma / Tozai) — Suica עובד גם פה.</p>
+        <p>• Fushimi Inari: JR Nara Line (2 תחנות מקיוטו) · Arashiyama: JR Sagano Line.</p>
+        <p>• הרבה מהיגאשייאמה/גיון נוח <strong>ברגל</strong> מבסיס מרכזי.</p>
+      </div>
+    </div>
+
+    <div class="guide-section">
+      <div class="guide-header" onclick="toggleGuide(this)">
+        <span>🛍️ קניות — איפה ומתי</span>
+        <span style="color:var(--muted);font-size:18px;transition:transform 0.3s">▼</span>
+      </div>
+      <div class="guide-body">
+        <div class="note">💡 <strong>Tax-Free:</strong> קחו דרכון לכל קנייה — פטור ממע"מ (~10%) מעל ¥5,000.<br>🕙 קניונים 10:00–20:00 · אלקטרוניקה 10:00–22:00 · Don Quijote לרוב 24 שעות.</div>
+        <table class="shop-table">
+          <tr><th>אזור</th><th>מה קונים</th><th>מתי</th></tr>
+          <tr><td><strong>שיבויה</strong></td><td>Hands, Loft, MEGA Don Quijote, Pokemon Center</td><td>אחה"צ/ערב</td></tr>
+          <tr><td><strong>הרג׳וקו/אומוטסנדו</strong></td><td>Takeshita St., @cosme TOKYO, AMORE Vintage, Tokyu Plaza</td><td>בוקר–צהריים</td></tr>
+          <tr><td><strong>גינזה</strong></td><td>GINZA SIX, Mitsukoshi, Uniqlo Flagship, MUJI, Ippodo Tea</td><td>יום (סגור ~20:00)</td></tr>
+          <tr><td><strong>אקיהברה</strong></td><td>Don Quijote, BicCamera AKIBA, Super Potato (רטרו)</td><td>אחה"צ</td></tr>
+          <tr><td><strong>שינג׳וקו</strong></td><td>Don Quijote Shinjuku, Kitamura Camera</td><td>ערב</td></tr>
+          <tr><td><strong>קיוטו</strong></td><td>Nishiki Market, EDION Kyoto, Don Quijote Kyoto Avanti</td><td>בוקר/צהריים</td></tr>
+        </table>
+        <div class="note" style="margin-top:12px">🎁 קניות גדולות שמרו ל<strong>יום האחרון (2.7)</strong> — לא לסחוב לקיוטו ובחזרה!</div>
+      </div>
+    </div>
+
+    <div class="guide-section">
+      <div class="guide-header" onclick="toggleGuide(this)">
+        <span>🏨 מלונות מומלצים</span>
+        <span style="color:var(--muted);font-size:18px;transition:transform 0.3s">▼</span>
+      </div>
+      <div class="guide-body">
+        <p><strong>🏙️ טוקיו — שיבויה</strong> <span style="color:var(--muted);font-size:12px">(23–26.6 ו-29.6–2.7)</span></p>
+        <div class="hotel-card"><div class="hotel-name">Shibuya Excel Hotel Tokyu</div><div class="hotel-meta">מחובר ישירות לתחנת שיבויה · דירוג 4.3</div><div class="hotel-pick">✓ הכי נוח לרכבות</div></div>
+        <div class="hotel-card"><div class="hotel-name">all day place shibuya</div><div class="hotel-meta">~$165/לילה · מעוצב · ליד Miyashita Park</div></div>
+        <div class="hotel-card"><div class="hotel-name">Tokyu Stay Shibuya</div><div class="hotel-meta">~$226/לילה · דירוג 9.4 · מכונת כביסה בחדר</div></div>
+        <div class="hotel-card"><div class="hotel-name">sequence MIYASHITA PARK</div><div class="hotel-meta">~$268/לילה · גג טרנדי · 5 דק' מהתחנה</div></div>
+        <br>
+        <p><strong>⛩️ קיוטו — גיון / קוואראמאצ'י</strong> <span style="color:var(--muted);font-size:12px">(26–29.6)</span></p>
+        <div class="hotel-card"><div class="hotel-name">THE GATE HOTEL KYOTO TAKASEGAWA by HULIC</div><div class="hotel-meta">4★ · דירוג 9.6 · ~$580 ל-3 לילות · ליד Pontocho</div><div class="hotel-pick">★ הבחירה המומלצת</div></div>
+        <div class="hotel-card"><div class="hotel-name">Kyoto Granbell Hotel</div><div class="hotel-meta">4★ · דירוג 9.2 · ~$499 · ליד Gion-Shijo</div></div>
+        <div class="hotel-card"><div class="hotel-name">Gion Shijo Hotel</div><div class="hotel-meta">דירוג 9.6 · ~$288 · תמורה מעולה</div></div>
+        <div class="hotel-card"><div class="hotel-name">Good Nature Hotel Kyoto</div><div class="hotel-meta">4.5★ · דירוג 9.4 · ~$764 · אקו-יוקרה על קוואראמאצ'י</div></div>
+        <div class="note">💡 בסיס בגיון/קוואראמאצ'י = הליכה למקדשים. אם חשוב גישה לשינקנסן ולערשייאמה — מלון ליד <strong>תחנת קיוטו</strong> עדיף.</div>
+      </div>
+    </div>
+
+    <div class="guide-section">
+      <div class="guide-header" onclick="toggleGuide(this)">
+        <span>✅ צ'ק-ליסט לפני הטיול</span>
+        <span style="color:var(--muted);font-size:18px;transition:transform 0.3s">▼</span>
+      </div>
+      <div class="guide-body">
+        <div id="checklist">
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להזמין: <strong>teamLab Planets</strong></span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להזמין: <strong>Shibuya Sky</strong> — סלוט שקיעה</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להזמין: <strong>אטרקציית יום 9</strong> (דיסני / הארי פוטר / גיבלי / Puroland)</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להזמין: <strong>Ghibli Museum</strong> — חודש מראש דרך Lawson</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להזמין: <strong>Nintendo Museum</strong> — הגרלה מראש</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להזמין: <strong>KIMONO TEA CEREMONY MAIKOYA</strong></span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להזמין מסעדות אומקסה (שבועות מראש — OMAKASE/TableCheck)</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>לקנות כרטיסי שינקנסן דרך <strong>SmartEX</strong> (לא JR Pass!)</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>להפעיל <strong>Suica</strong> בארנק ה-iPhone</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>לסגור מלונות: שיבויה (×2 פרקים) + גיון/קוואראמאצ'י</span></div>
+          <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><span>דרכון לכל קנייה (Tax-Free מעל ¥5,000)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER TIPS -->
   <div class="footer-tips">
     <h3>📌 הערות אחרונות</h3>
-    <div class="tip-item">
-      <span class="tip-icon">🎟️</span>
-      <span><strong>להזמין כבר עכשיו:</strong> teamLab Planets · Shibuya Sky (שקיעה) · אטרקציה גדולה יום 9 · Ghibli (אם בוחרים) · Nintendo Museum (אם בוחרים) · מסעדות סושי יוקרתיות</span>
-    </div>
-    <div class="tip-item">
-      <span class="tip-icon">☔</span>
-      <span><strong>גמישות:</strong> אם יורד גשם חזק — הפכו ימי חוץ (ערשייאמה/אסקוסה) לימי מוזיאונים/קניות (גינזה, teamLab)</span>
-    </div>
-    <div class="tip-item">
-      <span class="tip-icon">🚇</span>
-      <span><strong>תחבורה:</strong> Suica/Pasmo בנייד לכל הרכבות; רוב היעדים 10–25 דק' ברכבת מהבסיס</span>
-    </div>
-    <div class="tip-item">
-      <span class="tip-icon">🍜</span>
-      <span>כל המסעדות, הברים ובתי הקפה הם מתוך הרשימה — יש עוד עשרות במפה, תרגישו חופשי להחליף לפי מצב הרוח!</span>
-    </div>
+    <div class="tip-item"><span class="tip-icon">🎟️</span><span><strong>להזמין כבר עכשיו:</strong> teamLab · Shibuya Sky · אטרקציה יום 9 · מסעדות אומקסה</span></div>
+    <div class="tip-item"><span class="tip-icon">☔</span><span><strong>גמישות:</strong> גשם חזק? הפכו ימי חוץ לימי מוזיאונים/קניות (גינזה, teamLab)</span></div>
+    <div class="tip-item"><span class="tip-icon">🚇</span><span><strong>תחבורה:</strong> Suica/Pasmo בנייד — רוב היעדים 10–25 דק' ברכבת מהבסיס</span></div>
+    <div class="tip-item"><span class="tip-icon">🍜</span><span>יש עשרות מסעדות נוספות במפה — תרגישו חופשי להחליף לפי מצב הרוח!</span></div>
   </div>
 
 </div><!-- /app -->
 
-<!-- SCROLL TOP -->
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-// ── PASSWORD GATE ──
 const CORRECT_PWD = 'japan2026';
 const SESSION_KEY = 'japan2026_unlocked';
 
@@ -988,27 +1123,16 @@ function checkPwd() {
     input.classList.add('error');
     err.textContent = 'סיסמה שגויה, נסו שוב 🔒';
     setTimeout(() => input.classList.remove('error'), 500);
-    input.value = '';
-    input.focus();
+    input.value = ''; input.focus();
   }
 }
-
 function unlock() {
   document.getElementById('gate').classList.add('hidden');
   document.getElementById('app').classList.add('visible');
 }
+if (sessionStorage.getItem(SESSION_KEY) === '1') unlock();
+document.getElementById('pwd-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPwd(); });
 
-// Check session on load
-if (sessionStorage.getItem(SESSION_KEY) === '1') {
-  unlock();
-}
-
-// Enter key
-document.getElementById('pwd-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') checkPwd();
-});
-
-// ── TABS ──
 function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1017,83 +1141,59 @@ function showSection(id, btn) {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// ── COLLAPSIBLE DAYS ──
 function toggleDay(header) {
   const body = header.nextElementSibling;
   const chevron = header.querySelector('.day-chevron');
   const isOpen = body.classList.contains('open');
-
-  // Close all others
   document.querySelectorAll('.day-body.open').forEach(b => {
     b.classList.remove('open');
     b.previousElementSibling.querySelector('.day-chevron').classList.remove('open');
   });
-
-  if (!isOpen) {
-    body.classList.add('open');
-    chevron.classList.add('open');
-  }
+  if (!isOpen) { body.classList.add('open'); chevron.classList.add('open'); }
 }
 
-// ── BOOKING BANNER ──
 function toggleBooking() {
-  const body = document.getElementById('booking-body');
-  const chevron = document.getElementById('booking-chevron');
-  body.classList.toggle('open');
-  chevron.classList.toggle('open');
+  document.getElementById('booking-body').classList.toggle('open');
+  document.getElementById('booking-chevron').classList.toggle('open');
 }
 
-// ── TIPS ──
 function toggleTips(header) {
   const body = header.nextElementSibling;
   const chevron = header.querySelector('span:last-child');
   body.classList.toggle('open');
-  if (body.classList.contains('open')) {
-    chevron.style.transform = 'rotate(180deg)';
-    chevron.style.transition = 'transform 0.3s';
-  } else {
-    chevron.style.transform = '';
-  }
+  chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+  chevron.style.transition = 'transform 0.3s';
 }
 
-// ── SCROLL TOP ──
+function toggleGuide(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('span:last-child');
+  body.classList.toggle('open');
+  chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function toggleCheck(box) {
+  box.classList.toggle('checked');
+  box.textContent = box.classList.contains('checked') ? '✓' : '';
+}
+
 window.addEventListener('scroll', () => {
   const btn = document.getElementById('scroll-top');
-  if (window.scrollY > 300) btn.classList.add('visible');
-  else btn.classList.remove('visible');
+  btn.classList.toggle('visible', window.scrollY > 300);
 });
 
-// ── PWA MANIFEST (inline) ──
 const manifest = {
-  name: 'מסלול יפן 2026',
-  short_name: 'יפן 2026',
-  description: 'מסלול הטיול ליפן - יוני-יולי 2026',
-  start_url: '.',
-  display: 'standalone',
-  background_color: '#0a0e1a',
-  theme_color: '#0a0e1a',
-  lang: 'he',
-  dir: 'rtl',
-  icons: [
-    { src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🗾</text></svg>', sizes: '192x192', type: 'image/svg+xml' }
-  ]
+  name: 'מסלול יפן 2026', short_name: 'יפן 2026',
+  start_url: '.', display: 'standalone',
+  background_color: '#0a0e1a', theme_color: '#0a0e1a',
+  lang: 'he', dir: 'rtl',
+  icons: [{ src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🗾</text></svg>', sizes: '192x192', type: 'image/svg+xml' }]
 };
-const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-document.getElementById('manifest-link').href = URL.createObjectURL(blob);
+document.getElementById('manifest-link').href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type:'application/json'}));
 
-// ── SERVICE WORKER ──
 if ('serviceWorker' in navigator) {
-  const swCode = `
-const CACHE = 'japan-trip-v1';
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', './index.html'])));
-});
-self.addEventListener('fetch', e => {
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
-});
-`;
-  const swBlob = new Blob([swCode], {type: 'application/javascript'});
-  navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+  const sw = `const CACHE='japan-v2';self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','.\/index.html']))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
+  navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
 }
 </script>
 </body>
