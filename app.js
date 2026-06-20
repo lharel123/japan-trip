@@ -1,11 +1,15 @@
-const CORRECT_PWD = 'japan2026';
-const SESSION_KEY = 'japan2026_unlocked';
+const SESSION_KEY = 'japan2026_pwd';
 
-function checkPwd() {
+async function checkPwd() {
   const input = document.getElementById('pwd-input');
   const err = document.getElementById('pwd-err');
-  if (input.value.trim() === CORRECT_PWD) {
-    sessionStorage.setItem(SESSION_KEY, '1');
+  const pwd = input.value.trim();
+  if (!pwd) return;
+  
+  const decrypted = await decryptApp(pwd, window.ENCRYPTED_DATA, window.ENCRYPTED_IV, window.ENCRYPTED_SALT);
+  if (decrypted) {
+    sessionStorage.setItem(SESSION_KEY, pwd);
+    document.getElementById('app').innerHTML = decrypted;
     unlock();
   } else {
     input.classList.add('error');
@@ -14,11 +18,45 @@ function checkPwd() {
     input.value = ''; input.focus();
   }
 }
+
+async function decryptApp(password, encryptedDataHex, ivHex, saltHex) {
+  try {
+    const enc = new TextEncoder();
+    const dec = new TextDecoder();
+    const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), {name: "PBKDF2"}, false, ["deriveKey"]);
+    const salt = new Uint8Array(saltHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const iv = new Uint8Array(ivHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const encryptedData = new Uint8Array(encryptedDataHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const key = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt: salt, iterations: 100000, hash: "SHA-256" },
+      keyMaterial, { name: "AES-GCM", length: 256 }, false, ["decrypt"]
+    );
+    const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, encryptedData);
+    return dec.decode(decrypted);
+  } catch (e) {
+    return null;
+  }
+}
+
 function unlock() {
   document.getElementById('gate').classList.add('hidden');
   document.getElementById('app').classList.add('visible');
+  if (typeof renderPlaces === 'function' && placesData.length > 0) renderPlaces();
+  if (typeof fetchWeather === 'function')   if (typeof initLY091Polling === 'function') initLY091Polling();
 }
-if (sessionStorage.getItem(SESSION_KEY) === '1') unlock();
+
+(async function autoUnlock() {
+  const savedPwd = sessionStorage.getItem(SESSION_KEY);
+  if (savedPwd) {
+     const decrypted = await decryptApp(savedPwd, window.ENCRYPTED_DATA, window.ENCRYPTED_IV, window.ENCRYPTED_SALT);
+     if (decrypted) {
+       document.getElementById('app').innerHTML = decrypted;
+       unlock();
+     } else {
+       sessionStorage.removeItem(SESSION_KEY);
+     }
+  }
+})();
 document.getElementById('pwd-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPwd(); });
 
 function showSection(id, btn) {
@@ -118,14 +156,14 @@ async function fetchLY091Status() {
 }
 
 // Initial fetch + auto-refresh every 5 minutes (only within ±2 days of flight)
-(function initLY091Polling() {
+function initLY091Polling() {
   const flightDate = new Date('2026-06-23T20:00:00Z');
   const daysDiff = Math.abs((flightDate - new Date()) / (1000 * 60 * 60 * 24));
   fetchLY091Status();
   if (daysDiff <= 2) {
     setInterval(fetchLY091Status, 5 * 60 * 1000);
   }
-})();
+}
 
 window.addEventListener('scroll', () => {
   const btn = document.getElementById('scroll-top');
@@ -444,7 +482,6 @@ async function fetchWeather() {
   parseCity('https://wttr.in/Tokyo?format=%t|%C|%h',  'weather-tokyo', '🌧️ ~29°C · לח');
   parseCity('https://wttr.in/Kyoto?format=%t|%C|%h',  'weather-kyoto', '🌧️ ~32°C · חם מאוד');
 }
-fetchWeather();
 
 // ─── MISSING TAB CHECKLIST ───
 function toggleMissingCheck(item) {
