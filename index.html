@@ -737,6 +737,37 @@
     </div>
   </header>
 
+  <!-- WEATHER BANNER -->
+  <div id="weather-banner" style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(99,102,241,0.15));border:1px solid rgba(14,165,233,0.3);border-radius:12px;padding:14px 16px;margin:12px 16px 0;direction:rtl">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <!-- City weather pills -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <div style="text-align:center">
+          <div style="font-size:0.72rem;color:#94a3b8;margin-bottom:3px">🗼 טוקיו (23–26 + 29 יוני–2 יולי)</div>
+          <div id="weather-tokyo" style="font-size:1rem;font-weight:700;color:#e2e8f0">⏳ טוען...</div>
+          <div style="font-size:0.7rem;color:#64748b;margin-top:2px">ממוצע עונתי: 27–32°C · לח</div>
+        </div>
+        <div style="border-right:1px solid rgba(255,255,255,0.1);margin:0 4px"></div>
+        <div style="text-align:center">
+          <div style="font-size:0.72rem;color:#94a3b8;margin-bottom:3px">⛩️ קיוטו (26–29 יוני)</div>
+          <div id="weather-kyoto" style="font-size:1rem;font-weight:700;color:#e2e8f0">⏳ טוען...</div>
+          <div style="font-size:0.7rem;color:#64748b;margin-top:2px">ממוצע עונתי: 28–35°C · חם מאוד</div>
+        </div>
+      </div>
+      <!-- Clothing advice -->
+      <div style="font-size:0.8rem;color:#94a3b8;max-width:310px;line-height:1.6;border-right:2px solid rgba(99,102,241,0.4);padding-right:12px">
+        👗 <strong style="color:#e2e8f0">מה ללבוש:</strong><br>
+        בגדים קלים ונושמים (כותנה/לינן) · ☂️ מטריה חובה בכל יום<br>
+        🧴 קרם הגנה גבוה (UV חזק) · 👟 נעליים נוחות ועמידות למים<br>
+        <span style="color:#f87171">✗ הימנע מג׳ינס/בגדים כבדים</span>
+      </div>
+    </div>
+    <div id="weather-note" style="margin-top:10px;font-size:0.75rem;color:#64748b;border-top:1px solid rgba(255,255,255,0.06);padding-top:8px">
+      🌧️ <strong style="color:#94a3b8">עונת הגשמים 梅雨 (tsuyu)</strong> — גשמים קצרים יומיים, לא סיבה לדאגה. ביניהם שמש ולחות גבוהה.
+    </div>
+  </div>
+
+
   <!-- GENERAL TIPS (collapsed by default) -->
   <div class="tips-bar">
     <div class="tips-header" onclick="toggleTips(this)">
@@ -761,6 +792,7 @@
     <button class="tab-btn" onclick="showSection('map', this)">🗺️ מפה</button>
     <button class="tab-btn" onclick="showSection('places', this)">📍 מקומות</button>
     <button class="tab-btn" onclick="showSection('bookings', this)">✈️ הזמנות</button>
+    <button class="tab-btn" onclick="showSection('missing', this)">📋 חסר לנו</button>
   </div>
 
   <!-- ══ TOKYO 1 ══ -->
@@ -1540,6 +1572,297 @@
 
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+  <!-- ══ MISSING / TODO TAB ══ -->
+  <div id="missing" class="section">
+    <div class="section-title">📋 חסר לנו — מה עוד צריך לסדר</div>
+
+    <!-- SECTION A: TRANSPORTATION -->
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(59,130,246,0.25);border-right:4px solid #3b82f6;padding:18px;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:700;color:#60a5fa;margin-bottom:14px">🚄 תחבורה</div>
+
+      <!-- JR Pass -->
+      <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:13px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:700;color:#f87171;font-size:14px">🎫 JR Pass — CRITICAL</div>
+          <span style="background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;white-space:nowrap">⚠️ לא הוזמן</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.8);margin-top:8px;line-height:1.7">
+          <strong style="color:#fcd34d">⚡ חייב לקנות מחוץ ליפן!</strong> — מגיע בדואר לישראל<br>
+          • 14-day JR Pass מכסה שינקנסן + רכבות JR בטוקיו וקיוטו<br>
+          • מחיר: ~¥50,000 ($330) לאדם<br>
+          • מפעילים בנמל התעופה עם הדרכון עם הגעה<br>
+          • הזמן ב: <a href="https://www.japan-rail-pass.com/" target="_blank" style="color:#60a5fa">japan-rail-pass.com</a> או <a href="https://www.jrpass.com/" target="_blank" style="color:#60a5fa">jrpass.com</a>
+        </div>
+      </div>
+
+      <!-- Narita Express -->
+      <div style="background:var(--card2);border-radius:10px;padding:12px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">🚆 Narita Express (N'EX) — שדה התעופה → טוקיו</div>
+          <span style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.25);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;white-space:nowrap">✅ מכוסה ב-JR Pass</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6">
+          כ-90 דקות לשינג׳וקו/תחנת טוקיו · כל 30 דקות<br>
+          <span style="color:#94a3b8">חלופה: Limousine Bus לשינג׳וקו ~¥3,200 (ללא הזמנה)</span>
+        </div>
+      </div>
+
+      <!-- Suica -->
+      <div style="background:var(--card2);border-radius:10px;padding:12px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">💳 IC Card — Suica / PASMO</div>
+          <span style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.25);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;white-space:nowrap">ℹ️ לא חייב מראש</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6">
+          קנו בכספומט בנמל נריטה · טענו ¥2,000–3,000<br>
+          <strong style="color:#60a5fa">💡 מומלץ:</strong> הגדירו Suica ב-Apple Pay / Google Pay עוד בארץ!<br>
+          <a href="https://www.jreast.co.jp/e/pass/suica.html" target="_blank" style="color:#60a5fa;font-size:12px">jreast.co.jp — Suica Digital</a>
+        </div>
+      </div>
+
+      <!-- Shinkansen -->
+      <div style="background:var(--card2);border-radius:10px;padding:12px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">🚅 שינקנסן טוקיו ↔ קיוטו</div>
+          <span style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.25);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;white-space:nowrap">✅ JR Pass = חינם</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6">
+          <strong style="color:#fcd34d">Hikari</strong> (מכוסה JR Pass) — ~2:40 שעות · כל 30 דקות<br>
+          <span style="color:#94a3b8">Nozomi מהיר יותר (2:15) אך <strong>לא</strong> מכוסה ב-JR Pass</span><br>
+          הזמינו מקום (חינם עם JR Pass) במשרד JR בנמל התעופה
+        </div>
+      </div>
+
+      <!-- Kyoto local -->
+      <div style="background:var(--card2);border-radius:10px;padding:12px">
+        <div style="font-weight:600;color:#e2e8f0;font-size:13.5px;margin-bottom:6px">🚌 תחבורה מקומית בקיוטו</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6">
+          • Day Pass אוטובוס ¥700 — מכסה רוב המקדשים<br>
+          • קנו בתחנת קיוטו · כניסה ב-7-Eleven בתוך התחנה<br>
+          • Suica עובד גם על האוטובוסים
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION B: RESTAURANTS -->
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(249,115,22,0.25);border-right:4px solid #f97316;padding:18px;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:700;color:#fb923c;margin-bottom:14px">🍽️ מסעדות שצריך להזמין מראש</div>
+
+      <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;padding:8px 10px;background:rgba(249,115,22,0.06);border-radius:8px">📞 כלים להזמנה: <a href="https://pocket-concierge.jp/en" target="_blank" style="color:#fb923c">Pocket Concierge</a> · <a href="https://tableall.com" target="_blank" style="color:#fb923c">Tableall</a> · <a href="https://www.omakase.jp" target="_blank" style="color:#fb923c">Omakase.jp</a></div>
+
+      <!-- Tokyo restaurants -->
+      <div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:5px">🗼 טוקיו</div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:11px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">Sukiyabashi Jiro — Roppongi Hills</div>
+          <span style="background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">⚠️ להזמין</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          הסניף הקל יותר של ג׳ירו — עדיין מעולה<br>
+          הזמן דרך <a href="https://tableall.com" target="_blank" style="color:#fb923c">Tableall</a>
+        </div>
+      </div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:11px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">Manten Sushi Marunouchi</div>
+          <span style="background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">⚠️ להזמין</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          כבר ברשימה — הזמן דרך <a href="https://www.omakase.jp" target="_blank" style="color:#fb923c">omakase.jp</a>
+        </div>
+      </div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:11px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">Gyukatsu Kyoto Katsugyu</div>
+          <span style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.25);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">ℹ️ ללא הזמנה</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          תור ארוך — הגיעו לפני פתיחה (11:00)
+        </div>
+      </div>
+
+      <!-- Kyoto restaurants -->
+      <div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:5px">⛩️ קיוטו</div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:11px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">Kobe Beef Steak Mouriya Gion</div>
+          <span style="background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">⚠️ להזמין מוקדם</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          <a href="https://mouriya.co.jp/en/" target="_blank" style="color:#fb923c">mouriya.co.jp/en</a>
+        </div>
+      </div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:11px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">Wajoryomen Sugari — אטריות</div>
+          <span style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.25);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">ℹ️ ללא הזמנה</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          פופולרי מאוד — הגיעו בפתיחה (11:00)
+        </div>
+      </div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:11px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">WIFE &amp; HUSBAND Kyoto — קפה</div>
+          <span style="background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">⚠️ ל-DM ב-IG</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          צריך הזמנה דרך Instagram DM · חלופה: הגיעו בבוקר מוקדם
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION C: TICKETS -->
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(139,92,246,0.25);border-right:4px solid #8b5cf6;padding:18px;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:700;color:#a78bfa;margin-bottom:14px">🎟️ כרטיסים וחוויות שצריך להזמין</div>
+
+      <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:700;color:#e2e8f0;font-size:13.5px">🎨 TeamLab Planets, Toyosu</div>
+          <span style="background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;white-space:nowrap">⚠️ לא הוזמן</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6">
+          <strong style="color:#f87171">חובה להזמין מראש!</strong> — נחטף<br>
+          ¥3,200 לאדם · <a href="https://www.teamlab.art/e/planets/" target="_blank" style="color:#a78bfa">teamlab.art/e/planets</a>
+        </div>
+      </div>
+
+      <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:700;color:#e2e8f0;font-size:13.5px">🎬 מוזיאון גיבלי, מיטאקה</div>
+          <span style="background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;white-space:nowrap">⚠️ כנראה מלא</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6">
+          מערכת הגרלה — נחטף חודשים מראש<br>
+          נסו: <a href="https://www.ghibli-museum.jp/en/tickets/" target="_blank" style="color:#a78bfa">ghibli-museum.jp/en/tickets</a><br>
+          <span style="color:#94a3b8">גם אם מלא — שווה לבוא לצלם מבחוץ (פארק אינוקשירה)</span>
+        </div>
+      </div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:12px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">🎡 DisneySea</div>
+          <span style="background:rgba(148,163,184,0.1);color:#94a3b8;border:1px solid rgba(148,163,184,0.2);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">ℹ️ לא מתוכנן</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          הרבה יותר טוב מדיסנילנד למבוגרים — שווה שיקול<br>
+          <a href="https://www.tokyodisneyresort.jp/en/" target="_blank" style="color:#a78bfa;font-size:12px">tokyodisneyresort.jp/en</a>
+        </div>
+      </div>
+
+      <div style="background:var(--card2);border-radius:10px;padding:12px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">👘 חוויית קימונו בקיוטו</div>
+          <span style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.25);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">✅ ללא הזמנה</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:5px;line-height:1.5">
+          חנויות השכרה באזור גיון — walk-in OK<br>
+          מומלץ: Yumeyakata או Kyoto Kimono Rental Wargo
+        </div>
+      </div>
+
+      <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:600;color:#e2e8f0;font-size:13px">🍵 טקס תה בקיוטו — Camellia Tea</div>
+          <span style="background:rgba(139,92,246,0.12);color:#a78bfa;border:1px solid rgba(139,92,246,0.3);border-radius:20px;padding:2px 10px;font-size:11px;white-space:nowrap">⚠️ שווה להזמין</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:5px;line-height:1.5">
+          ¥2,000 לאדם · הגשימאיה, קיוטו<br>
+          <a href="https://www.tea-kyoto.com" target="_blank" style="color:#a78bfa">tea-kyoto.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION D: PRE-TRIP CHECKLIST -->
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(34,197,94,0.25);border-right:4px solid #22c55e;padding:18px;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:700;color:#4ade80;margin-bottom:14px">📱 לפני הנסיעה — רשימת עשה</div>
+
+      <div id="missing-checklist" style="display:grid;gap:8px">
+
+        <div class="missing-check-item" data-id="esim" style="background:var(--card2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:flex-start;cursor:pointer" onclick="toggleMissingCheck(this)">
+          <div class="missing-checkbox" style="width:20px;height:20px;border-radius:5px;border:2px solid #22c55e;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s"></div>
+          <div>
+            <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">📶 eSIM יפני — קנה לפני הנסיעה</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:4px;line-height:1.5">
+              <strong style="color:#4ade80">Airalo (מומלץ):</strong> <a href="https://www.airalo.com/japan-esim" target="_blank" style="color:#4ade80">airalo.com/japan-esim</a><br>
+              10GB / 30 ימים ≈ $15 · או SIM פיזי בנריטה (IIJmio / HIS Mobile)
+            </div>
+          </div>
+        </div>
+
+        <div class="missing-check-item" data-id="cash" style="background:var(--card2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:flex-start;cursor:pointer" onclick="toggleMissingCheck(this)">
+          <div class="missing-checkbox" style="width:20px;height:20px;border-radius:5px;border:2px solid #22c55e;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s"></div>
+          <div>
+            <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">💴 מזומן ין — לפחות ¥30,000 (≈₪800)</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:4px;line-height:1.5">
+              יפן עדיין מבוססת מזומן מאוד · ATM ב-7-Eleven ו-Japan Post מקבלים כרטיסים ישראלים
+            </div>
+          </div>
+        </div>
+
+        <div class="missing-check-item" data-id="jrpass" style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:flex-start;cursor:pointer" onclick="toggleMissingCheck(this)">
+          <div class="missing-checkbox" style="width:20px;height:20px;border-radius:5px;border:2px solid #f87171;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s"></div>
+          <div>
+            <div style="font-weight:700;color:#f87171;font-size:13.5px">⚡ JR Pass — הזמן עכשיו! מגיע בדואר</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:4px;line-height:1.5">
+              <a href="https://www.japan-rail-pass.com/" target="_blank" style="color:#f87171">japan-rail-pass.com</a> · משלוח לישראל ~7-10 ימי עסקים
+            </div>
+          </div>
+        </div>
+
+        <div class="missing-check-item" data-id="gmaps" style="background:var(--card2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:flex-start;cursor:pointer" onclick="toggleMissingCheck(this)">
+          <div class="missing-checkbox" style="width:20px;height:20px;border-radius:5px;border:2px solid #22c55e;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s"></div>
+          <div>
+            <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">🗺️ Google Maps — הורד offline לטוקיו וקיוטו</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:4px">חיוני גם עם eSIM — חסכון בנתונים ומהירות</div>
+          </div>
+        </div>
+
+        <div class="missing-check-item" data-id="translate" style="background:var(--card2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:flex-start;cursor:pointer" onclick="toggleMissingCheck(this)">
+          <div class="missing-checkbox" style="width:20px;height:20px;border-radius:5px;border:2px solid #22c55e;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s"></div>
+          <div>
+            <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">🈯 Google Translate — הורד יפנית offline + מצב מצלמה</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:4px">מצלמים תפריט/שלט ומקבלים תרגום מיידי</div>
+          </div>
+        </div>
+
+        <div class="missing-check-item" data-id="suica" style="background:var(--card2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:flex-start;cursor:pointer" onclick="toggleMissingCheck(this)">
+          <div class="missing-checkbox" style="width:20px;height:20px;border-radius:5px;border:2px solid #22c55e;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s"></div>
+          <div>
+            <div style="font-weight:600;color:#e2e8f0;font-size:13.5px">💳 Suica Digital — הגדר ב-Apple Pay / Google Pay מהארץ</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:4px">
+              ב-iPhone: Wallet → הוסף כרטיס → Suica (זמין גם מישראל)
+            </div>
+          </div>
+        </div>
+
+        <div class="missing-check-item" data-id="teamlab" style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:flex-start;cursor:pointer" onclick="toggleMissingCheck(this)">
+          <div class="missing-checkbox" style="width:20px;height:20px;border-radius:5px;border:2px solid #f87171;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s"></div>
+          <div>
+            <div style="font-weight:700;color:#f87171;font-size:13.5px">⚡ TeamLab Planets — הזמן כרטיסים עכשיו</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.65);margin-top:4px">
+              <a href="https://www.teamlab.art/e/planets/" target="_blank" style="color:#f87171">teamlab.art/e/planets</a> · ¥3,200 לאדם
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Progress counter -->
+      <div id="missing-progress" style="margin-top:14px;font-size:13px;color:#4ade80;text-align:center;padding:8px;background:rgba(34,197,94,0.06);border-radius:8px">
+        0 / 7 משימות הושלמו
+      </div>
+    </div>
+
+  </div><!-- /missing section -->
+
+
 <script>
 const CORRECT_PWD = 'japan2026';
 const SESSION_KEY = 'japan2026_unlocked';
@@ -1965,6 +2288,64 @@ function filterMap(cat, btn) {
       if (leafletMap.hasLayer(m)) leafletMap.removeLayer(m);
     }
   });
+}
+
+
+// ─── WEATHER WIDGET ───
+async function fetchWeather() {
+  async function parseCity(url, elId, fallback) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const txt = (await r.text()).trim();
+      const parts = txt.split('|');
+      const temp = parts[0] || '?';
+      const cond = parts[1] || '';
+      const hum  = parts[2] || '';
+      const condHe = cond.toLowerCase().includes('rain') ? '🌧️ גשום' :
+                     cond.toLowerCase().includes('cloud') ? '⛅ מעונן חלקית' :
+                     cond.toLowerCase().includes('overcast') ? '☁️ מעונן' :
+                     cond.toLowerCase().includes('sun') || cond.toLowerCase().includes('clear') ? '☀️ שמשי' :
+                     cond.toLowerCase().includes('thunder') ? '⛈️ סערה' : '🌤️';
+      document.getElementById(elId).innerHTML =
+        `<span style="font-size:1.1rem">${temp}</span> ${condHe} <span style="font-size:0.8rem;color:#94a3b8">${hum}</span>`;
+    } catch(e) {
+      document.getElementById(elId).innerHTML = fallback;
+    }
+  }
+  parseCity('https://wttr.in/Tokyo?format=%t|%C|%h',  'weather-tokyo', '🌧️ ~29°C · לח');
+  parseCity('https://wttr.in/Kyoto?format=%t|%C|%h',  'weather-kyoto', '🌧️ ~32°C · חם מאוד');
+}
+fetchWeather();
+
+// ─── MISSING TAB CHECKLIST ───
+function toggleMissingCheck(item) {
+  const box = item.querySelector('.missing-checkbox');
+  const isChecked = box.textContent === '✓';
+  if (isChecked) {
+    box.textContent = '';
+    box.style.background = '';
+    box.style.borderColor = item.style.borderColor || '#22c55e';
+    item.style.opacity = '1';
+  } else {
+    box.textContent = '✓';
+    box.style.background = box.style.borderColor || '#22c55e';
+    box.style.color = '#0a0e1a';
+    item.style.opacity = '0.6';
+  }
+  // Update progress
+  const total = document.querySelectorAll('.missing-check-item').length;
+  const done  = document.querySelectorAll('.missing-checkbox').length -
+                [...document.querySelectorAll('.missing-checkbox')].filter(b => !b.textContent).length;
+  const doneCnt = [...document.querySelectorAll('.missing-checkbox')].filter(b => b.textContent === '✓').length;
+  const prog = document.getElementById('missing-progress');
+  if (prog) {
+    prog.textContent = doneCnt + ' / ' + total + ' משימות הושלמו';
+    if (doneCnt === total) {
+      prog.style.color = '#4ade80';
+      prog.textContent = '🎉 הכל מוכן לנסיעה!';
+    }
+  }
 }
 
 </script>
