@@ -531,6 +531,112 @@
     .section { padding: 20px 20px 40px; }
     .choice-grid { grid-template-columns: 1fr 1fr; }
   }
+
+  /* ─── BOOKINGS TAB ─── */
+  .bookings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .bookings-grid { grid-template-columns: 1fr; }
+  }
+  .booking-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid rgba(212,168,83,0.12);
+    border-top: 4px solid var(--gold);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .booking-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  }
+  .booking-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 10px;
+  }
+  .airline-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: #003594;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 700; font-size: 14px; color: #fff;
+  }
+  .airline-logo { font-size: 18px; }
+  .booking-status {
+    font-size: 13px; font-weight: 700;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .status-scheduled { background: rgba(74,158,255,0.15); color: #4a9eff; border: 1px solid rgba(74,158,255,0.3); }
+  .status-confirmed { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+  .flight-info, .hotel-info {
+    padding: 10px 16px 14px;
+    flex: 1;
+  }
+  .flight-number {
+    font-size: 22px; font-weight: 800; color: var(--gold2);
+    margin-bottom: 12px; letter-spacing: 2px;
+  }
+  .flight-route {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 12px;
+    direction: ltr;
+  }
+  .route-point { text-align: center; flex: 1; }
+  .route-code { font-size: 24px; font-weight: 800; color: var(--white); }
+  .route-name { font-size: 10px; color: var(--muted); margin: 2px 0; }
+  .route-time { font-size: 18px; font-weight: 700; color: var(--gold); }
+  .route-terminal { font-size: 10px; color: var(--muted); }
+  .route-arrow { font-size: 20px; color: var(--muted); }
+  .flight-details-row {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    font-size: 12px; color: var(--muted);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 10px;
+  }
+  .booking-ref { margin-bottom: 10px; }
+  .ref-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .ref-number { font-size: 20px; font-weight: 800; color: var(--gold2); margin-top: 2px; }
+  .hotel-detail-row { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .hotel-note { font-style: italic; }
+  .booking-actions {
+    padding: 12px 16px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .booking-btn {
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: opacity 0.15s, transform 0.15s;
+    border: none; display: inline-block;
+  }
+  .booking-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-primary { background: #003594; color: #fff; }
+  .btn-secondary { background: var(--card2); color: var(--gold); border: 1px solid rgba(212,168,83,0.3); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+  .booking-placeholder {
+    border: 2px dashed rgba(212,168,83,0.25) !important;
+    border-top: 2px dashed rgba(212,168,83,0.25) !important;
+    background: rgba(255,255,255,0.02) !important;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 32px 16px; gap: 8px; text-align: center;
+  }
+  .booking-placeholder:hover { transform: translateY(-2px); border-color: rgba(212,168,83,0.5) !important; }
+  .placeholder-icon { font-size: 32px; margin-bottom: 4px; opacity: 0.5; }
+  .placeholder-label { font-size: 16px; font-weight: 700; color: var(--muted); }
+  .placeholder-sub { font-size: 13px; color: rgba(136,153,170,0.6); }
+  .btn-outline-dashed { background: transparent; color: var(--muted); border: 1px dashed rgba(136,153,170,0.4); cursor: not-allowed; margin-top: 8px; }
+  .btn-outline-dashed:hover { transform: none; opacity: 1; }
+
 </style>
 </head>
 <body>
@@ -616,6 +722,7 @@
     <button class="tab-btn" onclick="showSection('guide', this)">📖 מדריך</button>
     <button class="tab-btn" onclick="showSection('map', this)">🗺️ מפה</button>
     <button class="tab-btn" onclick="showSection('places', this)">📍 מקומות</button>
+    <button class="tab-btn" onclick="showSection('bookings', this)">✈️ הזמנות</button>
   </div>
 
   <!-- ══ TOKYO 1 ══ -->
@@ -1195,6 +1302,89 @@
     </div>
 
     <div class="places-grid" id="places-grid"></div>
+  </div>
+
+  <div id="bookings" class="section">
+    <div class="section-title">✈️ הזמנות הטיול</div>
+    <div class="bookings-grid">
+
+      <!-- ── El Al Flight Card ── -->
+      <div class="booking-card" style="border-top-color:#003594">
+        <div class="booking-card-header">
+          <div class="airline-badge" style="background:#003594">
+            <span class="airline-logo">✈️</span>
+            <span class="airline-name">El Al</span>
+          </div>
+          <div class="booking-status status-scheduled">🗓️ מתוכנן</div>
+        </div>
+        <div class="flight-info">
+          <div class="flight-number">LY091</div>
+          <div class="flight-route">
+            <div class="route-point">
+              <div class="route-code">TLV</div>
+              <div class="route-name">תל אביב בן גוריון</div>
+              <div class="route-time">23:30</div>
+              <div class="route-terminal">טרמינל 3</div>
+            </div>
+            <div class="route-arrow">✈️</div>
+            <div class="route-point">
+              <div class="route-code">NRT</div>
+              <div class="route-name">טוקיו נריטה</div>
+              <div class="route-time">17:05<sup>+1</sup></div>
+              <div class="route-terminal">טרמינל 1</div>
+            </div>
+          </div>
+          <div class="flight-details-row">
+            <span>📅 22–23 יוני 2026</span>
+            <span>✈️ Boeing 787-9</span>
+          </div>
+        </div>
+        <div class="booking-actions">
+          <a href="https://www.flightaware.com/live/flight/ELY91" target="_blank" class="booking-btn btn-primary">📡 מעקב חי →</a>
+          <a href="https://www.trip.com/flights/status-ly091/" target="_blank" class="booking-btn btn-secondary">🔍 סטטוס טיסה</a>
+          <a href="https://www.elal.com/en/check-in" target="_blank" class="booking-btn btn-outline">🪪 צ'ק-אין</a>
+        </div>
+      </div>
+
+      <!-- ── Agoda Hotel Card ── -->
+      <div class="booking-card" style="border-top-color:#e21a37">
+        <div class="booking-card-header">
+          <div class="airline-badge" style="background:#e21a37">
+            <span class="airline-logo">🏨</span>
+            <span class="airline-name">Agoda</span>
+          </div>
+          <div class="booking-status status-confirmed">✅ מאושר</div>
+        </div>
+        <div class="hotel-info">
+          <div class="booking-ref">
+            <div class="ref-label">מספר הזמנה</div>
+            <div class="ref-number">#2024337410</div>
+          </div>
+          <div class="hotel-detail-row">📧 liorharel852@gmail.com</div>
+          <div class="hotel-detail-row hotel-note">📋 לפרטי המלון ותאריכים — ניהול הזמנה</div>
+        </div>
+        <div class="booking-actions">
+          <a href="https://www.agoda.com/en-gb/booking/retrieve?bookingId=2024337410&emailAddress=liorharel852@gmail.com" target="_blank" class="booking-btn btn-primary" style="background:#e21a37">🏨 נהל הזמנה →</a>
+        </div>
+      </div>
+
+      <!-- ── Etihad Placeholder ── -->
+      <div class="booking-card booking-placeholder">
+        <div class="placeholder-icon">✈️</div>
+        <div class="placeholder-label">Etihad Airways</div>
+        <div class="placeholder-sub">הוסף הזמנה</div>
+        <button class="booking-btn btn-outline-dashed" disabled>+ הוסף הזמנה</button>
+      </div>
+
+      <!-- ── Booking.com Placeholder ── -->
+      <div class="booking-card booking-placeholder">
+        <div class="placeholder-icon">🏨</div>
+        <div class="placeholder-label">Booking.com</div>
+        <div class="placeholder-sub">הוסף הזמנה</div>
+        <button class="booking-btn btn-outline-dashed" disabled>+ הוסף הזמנה</button>
+      </div>
+
+    </div>
   </div>
 
 </div><!-- /app -->
