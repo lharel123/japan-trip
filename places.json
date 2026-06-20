@@ -1,0 +1,482 @@
+[
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Meiji Jingu",
+    "query": "Meiji Jingu, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Sensō-ji",
+    "query": "Sensō-ji, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Takeshita Street",
+    "query": "Takeshita Street, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Shibuya Scramble Crossing",
+    "query": "Shibuya Scramble Crossing, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Imperial Palace",
+    "query": "Imperial Palace, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Ueno Zoological Gardens",
+    "query": "Ueno Zoological Gardens, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Asakusa",
+    "query": "Asakusa, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Akihabara",
+    "query": "Akihabara, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Roppongi",
+    "query": "Roppongi, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Tokyo Tower",
+    "query": "Tokyo Tower, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Nezu Museum",
+    "query": "Nezu Museum, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Shinjuku Golden-Gai",
+    "query": "Shinjuku Golden-Gai, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Mitsukoshi Ginza",
+    "query": "Mitsukoshi Ginza, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "ART AQUARIUM MUSEUM",
+    "query": "ART AQUARIUM MUSEUM, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "GINZA SIX",
+    "query": "GINZA SIX, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Shinjuku Gyoen National Garden",
+    "query": "Shinjuku Gyoen National Garden, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "teamLab Planets",
+    "query": "teamLab Planets, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Tsukiji Outer Market",
+    "query": "Tsukiji Outer Market, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Tokyo Skytree",
+    "query": "Tokyo Skytree, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Mori Art Museum",
+    "query": "Mori Art Museum, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Hachikō Memorial Statue",
+    "query": "Hachikō Memorial Statue, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Tokyo Disneyland",
+    "query": "Tokyo Disneyland, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Tokyo DisneySea",
+    "query": "Tokyo DisneySea, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Tokyo National Museum",
+    "query": "Tokyo National Museum, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Ghibli Museum",
+    "query": "Ghibli Museum, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Sanrio Puroland",
+    "query": "Sanrio Puroland, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Zōjō-ji",
+    "query": "Zōjō-ji, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "MEGA Don Quijote",
+    "query": "MEGA Don Quijote, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Pokemon Center Shibuya",
+    "query": "Pokemon Center Shibuya, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Shibuya Sky",
+    "query": "Shibuya Sky, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "21_21 DESIGN SIGHT",
+    "query": "21_21 DESIGN SIGHT, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Attractions & Temples",
+    "place": "Tokyu Plaza Omotesando Omokado",
+    "query": "Tokyu Plaza Omotesando Omokado, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Bars",
+    "place": "The SG Club",
+    "query": "The SG Club, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Bars",
+    "place": "Bar Benfiddich",
+    "query": "Bar Benfiddich, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Bars",
+    "place": "The Bellwood",
+    "query": "The Bellwood, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Bars",
+    "place": "Artbar Tokyo Daikanyama",
+    "query": "Artbar Tokyo Daikanyama, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Bars",
+    "place": "THE MUSIC BAR CAVE SHIBUYA",
+    "query": "THE MUSIC BAR CAVE SHIBUYA, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "The Matcha Tokyo Omotesandō",
+    "query": "The Matcha Tokyo Omotesandō, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "Blue Bottle Coffee Shinjuku Cafe",
+    "query": "Blue Bottle Coffee Shinjuku Cafe, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "Ralph's Coffee Tokyo",
+    "query": "Ralph's Coffee Tokyo, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "Hatoya Asakusa",
+    "query": "Hatoya Asakusa, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "I'm donut Harajuku",
+    "query": "I'm donut Harajuku, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "Matcha Stand Maruni Tokyo Tsukiji",
+    "query": "Matcha Stand Maruni Tokyo Tsukiji, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "Glitch Coffee and Roasters GINZA",
+    "query": "Glitch Coffee and Roasters GINZA, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "I'm donut SHIBUYA",
+    "query": "I'm donut SHIBUYA, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Cafes & Bakeries",
+    "place": "%ARABICA Tokyo Azabudai Hills",
+    "query": "%ARABICA Tokyo Azabudai Hills, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "NOBU Tokyo",
+    "query": "NOBU Tokyo, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Yoroniku Tokyo",
+    "query": "Yoroniku Tokyo, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Manten Sushi Marunouchi",
+    "query": "Manten Sushi Marunouchi, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Gyukatsu Kyoto Katsugyu Shibuya Dogenzaka",
+    "query": "Gyukatsu Kyoto Katsugyu Shibuya Dogenzaka, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Jomon Roppongi",
+    "query": "Jomon Roppongi, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "AFURI Ebisu",
+    "query": "AFURI Ebisu, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Daikanyama Issai Kassai",
+    "query": "Daikanyama Issai Kassai, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Han no daidokoro bettei shibuya",
+    "query": "Han no daidokoro bettei shibuya, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Ippudo Ginza",
+    "query": "Ippudo Ginza, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Sugoi Niboshi Rāmen Nagi Shinjuku Golden Gai",
+    "query": "Sugoi Niboshi Rāmen Nagi Shinjuku Golden Gai, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Jikasei MENSHO Tokyo",
+    "query": "Jikasei MENSHO Tokyo, Tokyo, Japan"
+  },
+  {
+    "city": "Tokyo",
+    "cat": "Restaurants",
+    "place": "Sushi Ginza Onodera Tōryūmon",
+    "query": "Sushi Ginza Onodera Tōryūmon, Tokyo, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Sannenzaka",
+    "query": "Sannenzaka, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Nishiki Market",
+    "query": "Nishiki Market, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Arashiyama",
+    "query": "Arashiyama, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Kinkaku-ji Temple",
+    "query": "Kinkaku-ji Temple, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Pontocho",
+    "query": "Pontocho, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Fushimi Inari Taisha",
+    "query": "Fushimi Inari Taisha, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Nijō Castle",
+    "query": "Nijō Castle, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Kiyomizu-dera",
+    "query": "Kiyomizu-dera, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Yasaka Shrine",
+    "query": "Yasaka Shrine, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Nintendo Museum Kyoto",
+    "query": "Nintendo Museum Kyoto, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Arashiyama Bamboo Forest",
+    "query": "Arashiyama Bamboo Forest, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Attractions & Temples",
+    "place": "Arashiyama Monkey Park Iwatayama",
+    "query": "Arashiyama Monkey Park Iwatayama, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Bars",
+    "place": "K36 The Bar & Rooftop Kyoto",
+    "query": "K36 The Bar & Rooftop Kyoto, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Bars",
+    "place": "L'Escamoteur Kyoto",
+    "query": "L'Escamoteur Kyoto, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Cafes & Bakeries",
+    "place": "Maccha House Kyoto",
+    "query": "Maccha House Kyoto, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Cafes & Bakeries",
+    "place": "Starbucks Kyoto Ninenzaka Yasaka Chaya",
+    "query": "Starbucks Kyoto Ninenzaka Yasaka Chaya, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Cafes & Bakeries",
+    "place": "WIFE & HUSBAND Kyoto",
+    "query": "WIFE & HUSBAND Kyoto, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Cafes & Bakeries",
+    "place": "% ARABICA Kyoto Arashiyama",
+    "query": "% ARABICA Kyoto Arashiyama, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Restaurants",
+    "place": "Gyoza ChaoChao Shijo Kawaramachi",
+    "query": "Gyoza ChaoChao Shijo Kawaramachi, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Restaurants",
+    "place": "Kobe Beef Steak Mouriya Gion",
+    "query": "Kobe Beef Steak Mouriya Gion, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Restaurants",
+    "place": "Ichiran Kyoto Kawaramachi",
+    "query": "Ichiran Kyoto Kawaramachi, Kyoto, Japan"
+  },
+  {
+    "city": "Kyoto",
+    "cat": "Restaurants",
+    "place": "Wajoryomen Sugari",
+    "query": "Wajoryomen Sugari, Kyoto, Japan"
+  }
+]
