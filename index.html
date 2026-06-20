@@ -8,6 +8,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>🗾 מסלול יפן 2026</title>
 <link rel="manifest" href="#" id="manifest-link">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root {
     --navy: #0a0e1a;
@@ -298,6 +300,42 @@
   .map-btn:hover { background: var(--gold-dim); }
   .map-btn.active { background: var(--gold); color: var(--navy); }
   
+  /* ─── LEAFLET MAP BUTTONS ─── */
+  .map-area-btns, .map-cat-btns {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
+  }
+  .map-area-btn {
+    padding: 7px 13px; border-radius: 20px;
+    border: 1.5px solid rgba(212,168,83,0.35);
+    background: var(--card); color: var(--gold); cursor: pointer;
+    font-size: 13px; font-weight: 600; transition: all 0.2s; white-space: nowrap;
+  }
+  .map-area-btn:hover { background: var(--gold-dim); }
+  .map-area-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+  .map-cat-btn {
+    padding: 7px 13px; border-radius: 20px;
+    border: 1.5px solid rgba(74,158,255,0.4);
+    background: var(--card); color: var(--accent); cursor: pointer;
+    font-size: 13px; font-weight: 600; transition: all 0.2s; white-space: nowrap;
+  }
+  .map-cat-btn:hover { background: rgba(74,158,255,0.1); }
+  .map-cat-btn.active { background: var(--accent); color: var(--navy); border-color: var(--accent); }
+  .leaflet-popup-content-wrapper {
+    background: var(--card2) !important; color: var(--white) !important;
+    border: 1px solid rgba(212,168,83,0.3) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+  }
+  .leaflet-popup-tip { background: var(--card2) !important; }
+  .leaflet-popup-content { font-family: -apple-system,'Segoe UI',Arial,sans-serif; }
+  .popup-name { font-weight: 700; font-size: 14px; color: var(--gold2); margin-bottom: 6px; }
+  .popup-cat { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .popup-maps-btn {
+    display: inline-block; padding: 6px 14px;
+    background: var(--accent); color: #0a0e1a;
+    border-radius: 8px; font-size: 13px; font-weight: 700;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .popup-maps-btn:hover { opacity: 0.85; color: #0a0e1a; }
   .filter-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
   .filter-btn { padding: 6px 12px; border-radius: 14px; background: var(--card); border: 1px solid var(--muted); color: var(--white); cursor: pointer; transition: 0.2s; font-size: 13px; }
   .filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--navy); font-weight: bold; }
@@ -1272,14 +1310,21 @@
   <!-- ══ MAP ══ -->
   <div id="map" class="section">
     <div class="section-title">🗺️ מפה</div>
-    <div class="map-buttons">
-      <button class="map-btn active" onclick="setMap(this, 35.6595, 139.7005)">שיבויה</button>
-      <button class="map-btn" onclick="setMap(this, 35.0036, 135.778)">קיוטו-גיון</button>
-      <button class="map-btn" onclick="setMap(this, 35.6604, 139.7292)">רופונגי</button>
+    <div class="map-area-btns">
+      <button class="map-area-btn active" onclick="flyTo(35.6595,139.7005,14,this)">🏙️ שיבויה</button>
+      <button class="map-area-btn" onclick="flyTo(35.6938,139.7034,14,this)">🌆 שינג׳וקו</button>
+      <button class="map-area-btn" onclick="flyTo(35.6716,139.7642,14,this)">✨ גינזה</button>
+      <button class="map-area-btn" onclick="flyTo(35.7148,139.7967,14,this)">🏮 אסקוסה</button>
+      <button class="map-area-btn" onclick="flyTo(35.0094,135.7700,13,this)">⛩️ קיוטו</button>
     </div>
-    <div class="map-container">
-      <iframe id="map-iframe" src="https://maps.google.com/maps?q=35.6595,139.7005&z=14&output=embed" width="100%" height="450px" frameborder="0" style="border:0"></iframe>
+    <div class="map-cat-btns">
+      <button class="map-cat-btn active" onclick="filterMap('all',this)">הכל</button>
+      <button class="map-cat-btn" onclick="filterMap('Attractions',this)">🏛️ אטרקציות</button>
+      <button class="map-cat-btn" onclick="filterMap('Restaurants',this)">🍜 מסעדות</button>
+      <button class="map-cat-btn" onclick="filterMap('Bars',this)">🍸 בארים</button>
+      <button class="map-cat-btn" onclick="filterMap('Cafes',this)">☕ קפה</button>
     </div>
+    <div id="leaflet-map" style="height:500px;border-radius:12px;overflow:hidden;margin-top:12px"></div>
   </div>
 
   <!-- ══ PLACES ══ -->
@@ -1287,18 +1332,22 @@
     <div class="section-title">📍 מקומות</div>
     <input type="text" id="place-search" class="search-input" placeholder="חיפוש מקום..." oninput="renderPlaces()">
     
-    <div class="filter-group" id="city-filters">
-      <button class="filter-btn active" data-val="All" onclick="setFilter('city', 'All', this)">הכל (עיר)</button>
-      <button class="filter-btn" data-val="Tokyo" onclick="setFilter('city', 'Tokyo', this)">טוקיו</button>
-      <button class="filter-btn" data-val="Kyoto" onclick="setFilter('city', 'Kyoto', this)">קיוטו</button>
+    <div class="filter-group" id="area-filters">
+      <button class="filter-btn active" data-val="All" onclick="setFilter('area', 'All', this)">הכל</button>
+      <button class="filter-btn" data-val="shibuya" onclick="setFilter('area', 'shibuya', this)">🗼 שיבויה</button>
+      <button class="filter-btn" data-val="shinjuku" onclick="setFilter('area', 'shinjuku', this)">🏙️ שינג׳וקו</button>
+      <button class="filter-btn" data-val="asakusa" onclick="setFilter('area', 'asakusa', this)">🏮 אסקוסה/אואנו</button>
+      <button class="filter-btn" data-val="ginza" onclick="setFilter('area', 'ginza', this)">🌃 גינזה/רופונגי</button>
+      <button class="filter-btn" data-val="kyoto-east" onclick="setFilter('area', 'kyoto-east', this)">⛩️ קיוטו מזרח</button>
+      <button class="filter-btn" data-val="kyoto-west" onclick="setFilter('area', 'kyoto-west', this)">🎋 קיוטו מערב</button>
     </div>
     
     <div class="filter-group" id="cat-filters">
-      <button class="filter-btn active" data-val="All" onclick="setFilter('cat', 'All', this)">הכל (קטגוריה)</button>
-      <button class="filter-btn" data-val="Attractions & Temples" onclick="setFilter('cat', 'Attractions & Temples', this)">Attractions</button>
-      <button class="filter-btn" data-val="Restaurants" onclick="setFilter('cat', 'Restaurants', this)">Restaurants</button>
-      <button class="filter-btn" data-val="Bars" onclick="setFilter('cat', 'Bars', this)">Bars</button>
-      <button class="filter-btn" data-val="Cafes & Bakeries" onclick="setFilter('cat', 'Cafes & Bakeries', this)">Cafes</button>
+      <button class="filter-btn active" data-val="All" onclick="setFilter('cat', 'All', this)">הכל</button>
+      <button class="filter-btn" data-val="Attractions & Temples" onclick="setFilter('cat', 'Attractions & Temples', this)">🏛️ אטרקציות</button>
+      <button class="filter-btn" data-val="Restaurants" onclick="setFilter('cat', 'Restaurants', this)">🍜 מסעדות</button>
+      <button class="filter-btn" data-val="Bars" onclick="setFilter('cat', 'Bars', this)">🍸 בארים</button>
+      <button class="filter-btn" data-val="Cafes & Bakeries" onclick="setFilter('cat', 'Cafes & Bakeries', this)">☕ קפה</button>
     </div>
 
     <div class="places-grid" id="places-grid"></div>
@@ -1537,31 +1586,50 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
 }
 
-// Map Logic
-function setMap(btn, lat, lng) {
-  document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('map-iframe').src = 'https://maps.google.com/maps?q=' + lat + ',' + lng + '&z=14&output=embed';
+// ─── NEIGHBORHOOD ASSIGNMENT ───
+function getArea(placeName, city) {
+  const n = placeName.toLowerCase();
+  const shibuyaKw = ['shibuya','daikanyama','ebisu','harajuku','omotesando','aoyama','meiji jingu','yoyogi','hachiko','pokemon center','hands ','shibuya loft','mega don','tokyu plaza','@cosme','amore vintage','ralph','matcha tokyo','donut','afuri','issai','artbar','cave shibuya','han no','gyukatsu'];
+  const shinjukuKw = ['shinjuku','golden gai','golden-gai','gyoen','blue bottle shinjuku','nagi shinjuku','mensho'];
+  const asakusaKw = ['asakusa','senso','nakamise','kappabashi','skytree','ueno','akihabara','biccamera','teamlab','tsukiji','hatoya'];
+  const ginzaKw = ['ginza','roppongi','tokyo tower','zojo','azabudai','nobu tokyo','yoroniku','jomon roppongi','mori art','21_21','bellwood','benfiddich','gold bar','sg club','edition'];
+  const kyotoWestKw = ['arashiyama','bamboo','kinkaku','nijo castle','kimono forest','monkey park','arabica kyoto arashiyama','arabica arashiyama','nintendo museum'];
+  const kyotoEastKw = ['fushimi','kiyomizu','gion','yasaka','sannenzaka','ninenzaka','nishiki','pontocho','higashiyama','tofuku','tenju','starbucks kyoto','maccha house','wife & husband','mouriya','chaochao','ichiran kyoto','escamoteur','k36','sugari','manga museum','kyoto national museum'];
+
+  for (const kw of shibuyaKw) if (n.includes(kw)) return 'shibuya';
+  for (const kw of shinjukuKw) if (n.includes(kw)) return 'shinjuku';
+  for (const kw of asakusaKw) if (n.includes(kw)) return 'asakusa';
+  for (const kw of ginzaKw) if (n.includes(kw)) return 'ginza';
+  for (const kw of kyotoWestKw) if (n.includes(kw)) return 'kyoto-west';
+  for (const kw of kyotoEastKw) if (n.includes(kw)) return 'kyoto-east';
+  if (city === 'Kyoto') return 'kyoto-east';
+  return 'shibuya';
 }
 
-// Places Logic
+const AREA_LABELS = {
+  shibuya: '🗼 שיבויה',
+  shinjuku: '🏙️ שינג׳וקו',
+  asakusa: '🏮 אסקוסה/מזרח',
+  ginza: '🌃 גינזה/רופונגי',
+  'kyoto-east': '⛩️ קיוטו מזרח',
+  'kyoto-west': '🎋 קיוטו מערב',
+};
+
+// ─── PLACES LOGIC ───
 let placesData = [];
-let currentCityFilter = 'All';
+let currentAreaFilter = 'All';
 let currentCatFilter = 'All';
+let _mapDataReady = false;
 
 fetch('places.csv')
   .then(res => res.text())
   .then(csv => {
-    const lines = csv.trim().split('\n').slice(1); // skip header
+    const lines = csv.trim().split('\n').slice(1);
     placesData = lines.map(line => {
-      // Basic CSV parse (handles quoted col 4)
       const parts = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g).map(s => s.replace(/(^"|"$)/g, ''));
-      return {
-        city: parts[0],
-        cat: parts[1],
-        place: parts[2],
-        query: parts[3]
-      };
+      const p = { city: parts[0], cat: parts[1], place: parts[2], query: parts[3] };
+      p.area = getArea(p.place, p.city);
+      return p;
     });
     placesData.sort((a, b) => {
       if (a.cat < b.cat) return -1;
@@ -1571,12 +1639,14 @@ fetch('places.csv')
       return 0;
     });
     renderPlaces();
+    _mapDataReady = true;
+    if (document.getElementById('map').classList.contains('active')) tryInitMap();
   });
 
 function setFilter(type, val, btn) {
   document.querySelectorAll('#' + type + '-filters .filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  if (type === 'city') currentCityFilter = val;
+  if (type === 'area') currentAreaFilter = val;
   if (type === 'cat') currentCatFilter = val;
   renderPlaces();
 }
@@ -1585,17 +1655,15 @@ function renderPlaces() {
   const search = document.getElementById('place-search').value.toLowerCase();
   const grid = document.getElementById('places-grid');
   grid.innerHTML = '';
-  
   placesData.forEach(p => {
-    if (currentCityFilter !== 'All' && p.city !== currentCityFilter) return;
-    if (currentCatFilter !== 'All' && !p.cat.includes(currentCatFilter)) return; // using includes because some categories might slightly differ
+    if (currentAreaFilter !== 'All' && p.area !== currentAreaFilter) return;
+    if (currentCatFilter !== 'All' && !p.cat.includes(currentCatFilter)) return;
     if (search && !p.place.toLowerCase().includes(search) && !p.cat.toLowerCase().includes(search) && !p.city.toLowerCase().includes(search)) return;
-    
     const a = document.createElement('a');
-    a.className = 'place-card animate-on-scroll is-visible'; // default visible in grid
+    a.className = 'place-card animate-on-scroll is-visible';
     a.href = 'https://maps.google.com/search?q=' + encodeURIComponent(p.query);
     a.target = '_blank';
-    a.innerHTML = '<div class="place-card-title">' + p.place + '</div><div class="place-card-cat">' + p.city + ' • ' + p.cat.split(' ')[0] + '</div>';
+    a.innerHTML = '<div class="place-card-title">' + p.place + '</div><div class="place-card-cat">' + (AREA_LABELS[p.area] || p.city) + ' · ' + p.cat.split(' ')[0] + '</div>';
     grid.appendChild(a);
   });
 }
@@ -1619,7 +1687,184 @@ const originalShowSection = showSection;
 showSection = function(id, btn) {
   originalShowSection(id, btn);
   setTimeout(observeCards, 100);
+  if (id === 'map') setTimeout(tryInitMap, 200);
 };
+
+
+// ─── LEAFLET MAP ───
+const PLACES_COORDS = {
+  "Meiji Jingu": [35.6763, 139.6993],
+  "Takeshita Street": [35.6702, 139.7027],
+  "Shibuya Scramble Crossing": [35.6595, 139.7005],
+  "Hachikō Memorial Statue": [35.6591, 139.7006],
+  "Shibuya Sky": [35.6580, 139.7016],
+  "Pokemon Center Shibuya": [35.6582, 139.7021],
+  "Hands Shibuya": [35.6597, 139.7000],
+  "Shibuya Loft": [35.6600, 139.6995],
+  "MEGA Don Quijote": [35.6599, 139.6993],
+  "Tokyu Plaza Omotesando Omokado": [35.6653, 139.7095],
+  "@cosme TOKYO": [35.6658, 139.7060],
+  "AMORE Vintage AOYAMA": [35.6660, 139.7130],
+  "Nezu Museum": [35.6632, 139.7163],
+  "The Matcha Tokyo Omotesandō": [35.6660, 139.7060],
+  "Ralph's Coffee Tokyo": [35.6651, 139.7094],
+  "I'm donut Harajuku": [35.6695, 139.7029],
+  "I'm donut SHIBUYA": [35.6590, 139.7015],
+  "AFURI Ebisu": [35.6484, 139.7100],
+  "Daikanyama Issai Kassai": [35.6490, 139.7023],
+  "Artbar Tokyo Daikanyama": [35.6489, 139.7015],
+  "THE MUSIC BAR CAVE SHIBUYA": [35.6590, 139.7000],
+  "Han no daidokoro bettei shibuya": [35.6594, 139.6988],
+  "Gyukatsu Kyoto Katsugyu Shibuya Dogenzaka": [35.6582, 139.6987],
+  "Shinjuku Gyoen National Garden": [35.6850, 139.7100],
+  "Shinjuku Golden-Gai": [35.6938, 139.7034],
+  "Don Quijote Shinjuku Tonanguchi": [35.6928, 139.7008],
+  "Blue Bottle Coffee Shinjuku Cafe": [35.6929, 139.7003],
+  "Sugoi Niboshi Rāmen Nagi Shinjuku Golden Gai": [35.6935, 139.7032],
+  "Jikasei MENSHO Tokyo": [35.6867, 139.7046],
+  "Sensō-ji": [35.7148, 139.7967],
+  "Kappabashi Kitchen Tools Street": [35.7173, 139.7942],
+  "Hatoya Asakusa": [35.7146, 139.7969],
+  "Tokyo Skytree": [35.7101, 139.8107],
+  "Tokyo National Museum": [35.7188, 139.7765],
+  "National Museum of Nature and Science": [35.7165, 139.7762],
+  "Ueno Zoological Gardens": [35.7168, 139.7714],
+  "Akihabara": [35.7023, 139.7745],
+  "Don Quijote Akihabara": [35.6985, 139.7731],
+  "BicCamera AKIBA Store": [35.6993, 139.7729],
+  "Tsukiji Outer Market": [35.6654, 139.7707],
+  "Matcha Stand Maruni Tokyo Tsukiji": [35.6654, 139.7710],
+  "Kaneko Nori Store Tsukiji": [35.6650, 139.7700],
+  "teamLab Planets": [35.6479, 139.7948],
+  "GINZA SIX": [35.6716, 139.7642],
+  "Uniqlo Ginza Flagship Store": [35.6720, 139.7656],
+  "MUJI - Ginza Flagship Store": [35.6720, 139.7658],
+  "Mitsukoshi Ginza": [35.6718, 139.7648],
+  "ART AQUARIUM MUSEUM": [35.6712, 139.7677],
+  "Glitch Coffee and Roasters GINZA": [35.6720, 139.7655],
+  "X coffee GINZA": [35.6725, 139.7660],
+  "Ippudo Ginza": [35.6724, 139.7661],
+  "Manten Sushi Marunouchi": [35.6808, 139.7630],
+  "Sushi Ginza Onodera Tōryūmon": [35.6718, 139.7644],
+  "NOBU Tokyo": [35.6650, 139.7308],
+  "Yoroniku Tokyo": [35.6645, 139.7295],
+  "Jomon Roppongi": [35.6615, 139.7303],
+  "Mori Art Museum": [35.6604, 139.7293],
+  "21_21 DESIGN SIGHT": [35.6660, 139.7243],
+  "Tokyo Tower": [35.6586, 139.7454],
+  "Zōjō-ji": [35.6558, 139.7487],
+  "%ARABICA Tokyo Azabudai Hills": [35.6568, 139.7431],
+  "The SG Club": [35.6532, 139.7105],
+  "Bar Benfiddich": [35.6923, 139.6945],
+  "The Bellwood": [35.6602, 139.7254],
+  "Gold Bar at EDITION": [35.6650, 139.7301],
+  "Imperial Palace": [35.6852, 139.7528],
+  "Ghibli Museum": [35.6963, 139.5703],
+  "Tokyo Disneyland": [35.6329, 139.8804],
+  "Tokyo DisneySea": [35.6267, 139.8854],
+  "Sanrio Puroland": [35.6295, 139.4373],
+  "Fushimi Inari Taisha": [34.9671, 135.7727],
+  "Kiyomizu-dera": [34.9949, 135.7851],
+  "Sannenzaka": [34.9985, 135.7815],
+  "Yasaka Shrine": [35.0036, 135.7785],
+  "Nishiki Market": [35.0046, 135.7659],
+  "Pontocho": [35.0080, 135.7700],
+  "Tōfuku-ji Temple": [34.9758, 135.7720],
+  "Tenju-an Temple": [35.0272, 135.7939],
+  "Starbucks Kyoto Ninenzaka Yasaka Chaya": [34.9988, 135.7820],
+  "Maccha House Kyoto": [35.0041, 135.7666],
+  "WIFE & HUSBAND Kyoto": [35.0437, 135.7582],
+  "Kobe Beef Steak Mouriya Gion": [35.0031, 135.7748],
+  "Gyoza ChaoChao Shijo Kawaramachi": [35.0040, 135.7689],
+  "Ichiran Kyoto Kawaramachi": [35.0036, 135.7683],
+  "L'Escamoteur Kyoto": [35.0028, 135.7760],
+  "K36 The Bar & Rooftop Kyoto": [35.0032, 135.7744],
+  "Wajoryomen Sugari": [35.0038, 135.7610],
+  "Kyoto International Manga Museum": [35.0113, 135.7582],
+  "Kyoto National Museum": [34.9894, 135.7726],
+  "Nijō Castle": [35.0143, 135.7481],
+  "Arashiyama Bamboo Forest": [35.0172, 135.6724],
+  "Arashiyama": [35.0094, 135.6737],
+  "Kinkaku-ji Temple": [35.0394, 135.7292],
+  "Kimono Forest Arashiyama": [35.0100, 135.6780],
+  "Arashiyama Monkey Park Iwatayama": [35.0077, 135.6760],
+  "% ARABICA Kyoto Arashiyama": [35.0136, 135.6751],
+  "Nintendo Museum Kyoto": [34.9743, 135.7267],
+};
+
+function getCatColor(cat) {
+  if (cat.includes('Restaurant')) return '#ef4444';
+  if (cat.includes('Bar')) return '#8b5cf6';
+  if (cat.includes('Cafe') || cat.includes('cafe') || cat.includes('Bakery') || cat.includes('Coffee')) return '#f97316';
+  return '#3b82f6';
+}
+
+function findCoords(placeName) {
+  if (PLACES_COORDS[placeName]) return PLACES_COORDS[placeName];
+  const n = placeName.toLowerCase();
+  for (const [key, coords] of Object.entries(PLACES_COORDS)) {
+    if (n.includes(key.toLowerCase()) || key.toLowerCase().includes(n)) return coords;
+  }
+  return null;
+}
+
+let leafletMap = null;
+let allMarkers = [];
+
+function tryInitMap() {
+  if (!_mapDataReady) return;
+  if (leafletMap) { leafletMap.invalidateSize(); return; }
+  initLeafletMap();
+}
+
+function initLeafletMap() {
+  if (leafletMap) { leafletMap.invalidateSize(); return; }
+  if (typeof L === 'undefined') { setTimeout(initLeafletMap, 300); return; }
+
+  leafletMap = L.map('leaflet-map', { zoomControl: true }).setView([35.6595, 139.7005], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
+    maxZoom: 19
+  }).addTo(leafletMap);
+
+  placesData.forEach(p => {
+    const coords = findCoords(p.place);
+    if (!coords) return;
+    const color = getCatColor(p.cat);
+    const marker = L.circleMarker(coords, {
+      radius: 8, fillColor: color,
+      color: '#fff', weight: 2, opacity: 1, fillOpacity: 0.9
+    });
+    const mapsUrl = 'https://maps.google.com/search?q=' + encodeURIComponent(p.query || p.place);
+    marker.bindPopup(
+      '<div class="popup-name">' + p.place + '</div>' +
+      '<div class="popup-cat">' + p.cat + '</div>' +
+      '<a class="popup-maps-btn" href="' + mapsUrl + '" target="_blank">📍 פתח ב-Maps</a>'
+    );
+    marker._catKey = p.cat;
+    marker.addTo(leafletMap);
+    allMarkers.push(marker);
+  });
+}
+
+function flyTo(lat, lng, zoom, btn) {
+  if (!leafletMap) return;
+  leafletMap.flyTo([lat, lng], zoom, { duration: 1.2 });
+  document.querySelectorAll('.map-area-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function filterMap(cat, btn) {
+  document.querySelectorAll('.map-cat-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  allMarkers.forEach(m => {
+    if (cat === 'all' || m._catKey.includes(cat)) {
+      if (!leafletMap.hasLayer(m)) m.addTo(leafletMap);
+    } else {
+      if (leafletMap.hasLayer(m)) leafletMap.removeLayer(m);
+    }
+  });
+}
 
 </script>
 </body>
