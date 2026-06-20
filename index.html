@@ -1314,6 +1314,13 @@ fetch('places.csv')
         query: parts[3]
       };
     });
+    placesData.sort((a, b) => {
+      if (a.cat < b.cat) return -1;
+      if (a.cat > b.cat) return 1;
+      if (a.place < b.place) return -1;
+      if (a.place > b.place) return 1;
+      return 0;
+    });
     renderPlaces();
   });
 
