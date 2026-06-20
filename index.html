@@ -1893,6 +1893,8 @@ function showSection(id, btn) {
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   window.scrollTo({top: 0, behavior: 'smooth'});
+  setTimeout(observeCards, 100);
+  if (id === 'map') setTimeout(tryInitMap, 200);
 }
 
 function toggleDay(header) {
@@ -2107,12 +2109,7 @@ function observeCards() {
 }
 observeCards();
 
-const originalShowSection = showSection;
-showSection = function(id, btn) {
-  originalShowSection(id, btn);
-  setTimeout(observeCards, 100);
-  if (id === 'map') setTimeout(tryInitMap, 200);
-};
+
 
 
 // ─── LEAFLET MAP ───
@@ -2246,9 +2243,9 @@ function initLeafletMap() {
   if (typeof L === 'undefined') { setTimeout(initLeafletMap, 300); return; }
 
   leafletMap = L.map('leaflet-map', { zoomControl: true }).setView([35.6595, 139.7005], 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
-    maxZoom: 19
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 20
   }).addTo(leafletMap);
 
   placesData.forEach(p => {
