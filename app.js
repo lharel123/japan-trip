@@ -42,7 +42,8 @@ function unlock() {
   document.getElementById('gate').classList.add('hidden');
   document.getElementById('app').classList.add('visible');
   if (typeof renderPlaces === 'function' && placesData.length > 0) renderPlaces();
-  if (typeof fetchWeather === 'function')   if (typeof initLY091Polling === 'function') initLY091Polling();
+  if (typeof fetchWeather === 'function') fetchWeather();
+  if (typeof initLY091Polling === 'function') initLY091Polling();
 }
 
 (async function autoUnlock() {

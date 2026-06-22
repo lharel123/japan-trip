@@ -11,7 +11,12 @@
     --muted: #8899aa;
     --accent: #4a9eff;
     --radius: 14px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* category colors */
+    --cat-food: #f97316;
+    --cat-sight: #4a9eff;
+    --cat-shop: #a855f7;
+    --cat-hotel: #22c55e;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -20,6 +25,33 @@
     color: var(--white);
     min-height: 100vh;
     direction: rtl;
+  }
+
+  /* ─── GLOBAL POLISH ─── */
+  /* All cards get rounded corners */
+  .day-card, .booking-card, .guide-section, .place-card, .hotel-card,
+  .tips-bar, .footer-tips, .choice-card {
+    border-radius: 12px;
+  }
+  /* Interactive elements cursor + hover brightness */
+  button, .tab-btn, .map-area-btn, .map-cat-btn, .filter-btn,
+  .booking-btn, .map-btn, .place-card, .day-header, .guide-header {
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  button:hover, .tab-btn:hover, .map-area-btn:hover, .map-cat-btn:hover,
+  .filter-btn:hover, .booking-btn:hover, .map-btn:hover, .place-card:hover {
+    filter: brightness(1.05);
+  }
+
+  /* ─── FADE-IN ANIMATION ─── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   /* ─── PASSWORD GATE ─── */
@@ -146,50 +178,80 @@
   }
   .booking-item::before { content: "🔖"; flex-shrink: 0; }
 
-  /* ─── HERO ─── */
+  /* ─── HERO — Japan-themed redesign ─── */
   .hero {
-    background: linear-gradient(180deg, #1a0a10 0%, #0a0e1a 100%);
+    background: linear-gradient(135deg, #c0392b 0%, #8e0000 40%, #2c1810 100%);
     padding: 40px 20px 30px;
     text-align: center;
-    border-bottom: 1px solid rgba(212,168,83,0.15);
+    border-bottom: 1px solid rgba(212,168,83,0.2);
     position: relative;
     overflow: hidden;
   }
+  /* Subtle wave/sakura pattern overlay */
   .hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(188,0,45,0.12) 0%, transparent 70%);
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, rgba(255,200,200,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  /* Decorative sakura petals via pseudo-element */
+  .hero::after {
+    content: '🌸 🌸 🌸';
+    position: absolute;
+    top: 10px; left: 50%; transform: translateX(-50%);
+    font-size: 18px;
+    opacity: 0.25;
+    letter-spacing: 20px;
     pointer-events: none;
   }
   .hero-flag {
     font-size: 56px; margin-bottom: 14px;
     display: block;
-    filter: drop-shadow(0 4px 12px rgba(188,0,45,0.4));
+    filter: drop-shadow(0 4px 12px rgba(255,100,100,0.4));
+    position: relative; z-index: 1;
   }
   .hero-title {
-    font-size: 32px; font-weight: 800;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 50%, var(--white) 100%);
+    font-size: 2.6rem; font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, var(--gold2) 50%, var(--gold) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    position: relative; z-index: 1;
+    text-shadow: none;
+    line-height: 1.1;
+  }
+  /* Tagline / subtitle */
+  .hero-subtitle {
+    font-size: 1rem; font-weight: 700;
+    color: rgba(255,220,200,0.9);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    position: relative; z-index: 1;
   }
   .hero-dates {
-    font-size: 16px; color: var(--muted);
+    font-size: 17px;
+    color: #ffd6b0;
     letter-spacing: 1px;
+    position: relative; z-index: 1;
+    font-weight: 600;
   }
-  .hero-dates strong { color: var(--gold); }
+  .hero-dates strong { color: var(--gold2); font-size: 18px; }
   .hero-route {
     display: flex; align-items: center; justify-content: center;
     gap: 8px; margin-top: 16px; flex-wrap: wrap;
+    position: relative; z-index: 1;
   }
   .hero-route span {
-    background: var(--gold-dim);
-    border: 1px solid rgba(212,168,83,0.3);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
     border-radius: 20px; padding: 5px 14px;
-    font-size: 13px; color: var(--gold);
+    font-size: 13px; color: #fff;
     font-weight: 600;
   }
-  .hero-route .arrow { color: var(--muted); font-size: 12px; }
+  .hero-route .arrow { color: rgba(255,255,255,0.5); font-size: 12px; }
 
   /* ─── TIPS BAR ─── */
   .tips-bar {
@@ -212,12 +274,16 @@
   }
   .tips-body p:last-child { border-bottom: none; }
 
-  /* ─── TABS ─── */
+  /* ─── TABS — sticky + horizontal scroll ─── */
   .tabs {
-    display: flex; padding: 16px 16px 0;
-    gap: 8px; overflow-x: auto;
-    scrollbar-width: none;
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid rgba(212,168,83,0.1);
+    display: flex; padding: 12px 16px 8px;
+    gap: 8px;
+    overflow-x: auto; white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
   .tabs::-webkit-scrollbar { display: none; }
   .tab-btn {
@@ -234,13 +300,14 @@
     background: var(--gold-dim);
     border-color: var(--gold);
     color: var(--gold);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* ─── SECTION ─── */
-  .section { display: none; padding: 14px 16px 32px; }
+  .section { display: none; padding: 14px 16px 32px; direction: rtl; text-align: right; }
   .section.active { display: block; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
   .section-title {
     font-size: 22px; font-weight: 800;
@@ -249,34 +316,17 @@
     border-bottom: 1px solid rgba(212,168,83,0.2);
   }
 
-  
-  /* Enhanced UI */
-  :root {
-    --shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-  .day-card {
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .day-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-  .animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  /* Map & Places styles */
+  /* ─── MAP TAB ─── */
   .map-container {
     border-radius: var(--radius);
     overflow: hidden;
     margin-bottom: 16px;
     box-shadow: var(--shadow);
+  }
+  /* Map height bump */
+  #leaflet-map, #map-el {
+    height: 70vh;
+    min-height: 600px;
   }
   .map-buttons {
     display: flex; gap: 8px; justify-content: center; margin-bottom: 16px;
@@ -286,27 +336,61 @@
   }
   .map-btn:hover { background: var(--gold-dim); }
   .map-btn.active { background: var(--gold); color: var(--navy); }
-  
-  /* ─── LEAFLET MAP BUTTONS ─── */
+
+  /* Map area / category buttons — pill-shaped */
   .map-area-btns, .map-cat-btns {
     display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
   }
   .map-area-btn {
-    padding: 7px 13px; border-radius: 20px;
+    padding: 7px 16px; border-radius: 20px;
     border: 1.5px solid rgba(212,168,83,0.35);
     background: var(--card); color: var(--gold); cursor: pointer;
     font-size: 13px; font-weight: 600; transition: all 0.2s; white-space: nowrap;
   }
   .map-area-btn:hover { background: var(--gold-dim); }
   .map-area-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+  /* Category buttons — colored by category */
   .map-cat-btn {
-    padding: 7px 13px; border-radius: 20px;
-    border: 1.5px solid rgba(74,158,255,0.4);
-    background: var(--card); color: var(--accent); cursor: pointer;
+    padding: 7px 16px; border-radius: 20px;
+    background: var(--card); cursor: pointer;
     font-size: 13px; font-weight: 600; transition: all 0.2s; white-space: nowrap;
   }
-  .map-cat-btn:hover { background: rgba(74,158,255,0.1); }
-  .map-cat-btn.active { background: var(--accent); color: var(--navy); border-color: var(--accent); }
+  .map-cat-btn[data-cat="food"]  { border: 1.5px solid var(--cat-food); color: var(--cat-food); }
+  .map-cat-btn[data-cat="sight"] { border: 1.5px solid var(--cat-sight); color: var(--cat-sight); }
+  .map-cat-btn[data-cat="shop"]  { border: 1.5px solid var(--cat-shop); color: var(--cat-shop); }
+  .map-cat-btn[data-cat="hotel"] { border: 1.5px solid var(--cat-hotel); color: var(--cat-hotel); }
+  .map-cat-btn[data-cat="all"]   { border: 1.5px solid rgba(74,158,255,0.4); color: var(--accent); }
+  .map-cat-btn[data-cat="food"].active  { background: var(--cat-food); color: #fff; }
+  .map-cat-btn[data-cat="sight"].active { background: var(--cat-sight); color: #fff; }
+  .map-cat-btn[data-cat="shop"].active  { background: var(--cat-shop); color: #fff; }
+  .map-cat-btn[data-cat="hotel"].active { background: var(--cat-hotel); color: #fff; }
+  .map-cat-btn[data-cat="all"].active   { background: var(--accent); color: var(--navy); }
+  /* fallback for buttons without data-cat */
+  .map-cat-btn:not([data-cat]) {
+    border: 1.5px solid rgba(74,158,255,0.4); color: var(--accent);
+  }
+  .map-cat-btn:not([data-cat]).active { background: var(--accent); color: var(--navy); }
+
+  /* Map legend */
+  .map-legend {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    z-index: 500;
+    background: rgba(22, 29, 46, 0.92);
+    border: 1px solid rgba(212,168,83,0.25);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    backdrop-filter: blur(4px);
+    direction: rtl;
+  }
+  .map-legend-title { font-weight: 700; color: var(--gold2); margin-bottom: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .map-legend-item { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; color: var(--white); }
+  .map-legend-item:last-child { margin-bottom: 0; }
+  .map-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Leaflet popup */
   .leaflet-popup-content-wrapper {
     background: var(--card2) !important; color: var(--white) !important;
     border: 1px solid rgba(212,168,83,0.3) !important;
@@ -323,18 +407,46 @@
     text-decoration: none; transition: opacity 0.15s;
   }
   .popup-maps-btn:hover { opacity: 0.85; color: #0a0e1a; }
-  .filter-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .filter-btn { padding: 6px 12px; border-radius: 14px; background: var(--card); border: 1px solid var(--muted); color: var(--white); cursor: pointer; transition: 0.2s; font-size: 13px; }
+
+  /* ─── PLACES TAB ─── */
+  /* Search box — more prominent */
+  .search-input {
+    width: 100%; padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid #c0392b;
+    background: var(--card); color: var(--white);
+    margin-bottom: 16px; font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,168,83,0.15);
+  }
+  /* Neighborhood filter buttons wrap on mobile */
+  .filter-group {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+  }
+  .filter-btn {
+    padding: 6px 12px; border-radius: 14px; background: var(--card);
+    border: 1px solid var(--muted); color: var(--white); cursor: pointer;
+    transition: 0.2s; font-size: 13px;
+  }
   .filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--navy); font-weight: bold; }
-  
-  .search-input { width: 100%; padding: 12px; border-radius: var(--radius); border: 1px solid var(--muted); background: var(--card); color: var(--white); margin-bottom: 16px; font-size: 16px; }
-  
+
+  /* Place cards — colored left border by category */
   .places-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
   .place-card {
-    background: var(--card2); border-radius: 10px; padding: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.2s; cursor: pointer;
-    text-align: center; text-decoration: none; color: var(--white); display: flex; flex-direction: column; justify-content: center; min-height: 80px;
+    background: var(--card2); border-radius: 12px; padding: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.2s, filter 0.2s; cursor: pointer;
+    text-align: center; text-decoration: none; color: var(--white);
+    display: flex; flex-direction: column; justify-content: center; min-height: 80px;
+    border-left: 4px solid var(--muted);
   }
+  .place-card[data-cat="food"]  { border-left-color: var(--cat-food); }
+  .place-card[data-cat="sight"] { border-left-color: var(--cat-sight); }
+  .place-card[data-cat="shop"]  { border-left-color: var(--cat-shop); }
+  .place-card[data-cat="hotel"] { border-left-color: var(--cat-hotel); }
   .place-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); background: var(--card); }
   .place-card-title { font-weight: bold; font-size: 14px; margin-bottom: 4px; color: var(--gold2); }
   .place-card-cat { font-size: 11px; color: var(--muted); }
@@ -342,7 +454,7 @@
   /* ─── DAY CARD ─── */
   .day-card {
     background: var(--card);
-    border-radius: var(--radius);
+    border-radius: 12px;
     border: 1px solid rgba(212,168,83,0.12);
     margin-bottom: 12px;
     overflow: hidden;
@@ -424,6 +536,17 @@
     margin-right: 4px; font-weight: 600;
   }
 
+  /* ─── ANIMATE ON SCROLL ─── */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* ─── SPECIAL DAY 9 ─── */
   .choice-grid {
     display: grid; gap: 8px;
@@ -431,7 +554,7 @@
   }
   .choice-card {
     background: var(--card2);
-    border-radius: 10px; padding: 12px 14px;
+    border-radius: 12px; padding: 12px 14px;
     border: 1.5px solid rgba(212,168,83,0.15);
     font-size: 13.5px;
   }
@@ -448,7 +571,7 @@
   .footer-tips {
     margin: 0 16px 40px;
     background: var(--card);
-    border-radius: var(--radius);
+    border-radius: 12px;
     border: 1px solid rgba(212,168,83,0.15);
     padding: 20px;
   }
@@ -486,7 +609,7 @@
   .guide-section {
     margin-bottom: 16px;
     background: var(--card);
-    border-radius: var(--radius);
+    border-radius: 12px;
     border: 1px solid rgba(212,168,83,0.15);
     overflow: hidden;
   }
@@ -526,7 +649,7 @@
   .shop-table tr:last-child td { border-bottom: none; }
   /* Hotel cards */
   .hotel-card {
-    background: var(--card2); border-radius: 8px;
+    background: var(--card2); border-radius: 12px;
     padding: 10px 12px; margin: 8px 0;
     border: 1px solid rgba(212,168,83,0.1);
   }
@@ -548,38 +671,41 @@
   }
   .check-box.checked { background: var(--gold); color: var(--navy); font-size: 12px; }
 
-  /* ─── RESPONSIVE ─── */
-  @media (min-width: 600px) {
-    .hero { padding: 60px 40px 40px; }
-    .hero-title { font-size: 40px; }
-    .tabs { padding: 20px 20px 0; }
-    .section { padding: 20px 20px 40px; }
-    .choice-grid { grid-template-columns: 1fr 1fr; }
-  }
-
   /* ─── BOOKINGS TAB ─── */
+  /* Section headers for flights / hotels / restaurants */
+  .bookings-section-header {
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--gold2);
+    margin: 20px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(212,168,83,0.2);
+    display: flex; align-items: center; gap: 8px;
+  }
   .bookings-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
+    margin-bottom: 8px;
   }
   @media (max-width: 600px) {
     .bookings-grid { grid-template-columns: 1fr; }
   }
   .booking-card {
     background: var(--card);
-    border-radius: var(--radius);
+    border-radius: 12px;
     border: 1px solid rgba(212,168,83,0.12);
     border-top: 4px solid var(--gold);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    min-height: 200px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
   }
   .booking-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    filter: brightness(1.03);
   }
   .booking-card-header {
     display: flex;
@@ -597,10 +723,20 @@
   .airline-logo { font-size: 18px; }
   .booking-status {
     font-size: 13px; font-weight: 700;
-    padding: 4px 10px; border-radius: 20px;
+    padding: 4px 12px; border-radius: 20px;
   }
   .status-scheduled { background: rgba(74,158,255,0.15); color: #4a9eff; border: 1px solid rgba(74,158,255,0.3); }
-  .status-confirmed { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+  /* Confirmed badge — more prominent */
+  .status-confirmed {
+    background: #16a34a;
+    color: #fff;
+    border: 1px solid #22c55e;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 11px;
+    padding: 5px 12px;
+  }
   .flight-info, .hotel-info {
     padding: 10px 16px 14px;
     flex: 1;
@@ -654,6 +790,7 @@
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     padding: 32px 16px; gap: 8px; text-align: center;
+    min-height: 200px;
   }
   .booking-placeholder:hover { transform: translateY(-2px); border-color: rgba(212,168,83,0.5) !important; }
   .placeholder-icon { font-size: 32px; margin-bottom: 4px; opacity: 0.5; }
@@ -661,3 +798,12 @@
   .placeholder-sub { font-size: 13px; color: rgba(136,153,170,0.6); }
   .btn-outline-dashed { background: transparent; color: var(--muted); border: 1px dashed rgba(136,153,170,0.4); cursor: not-allowed; margin-top: 8px; }
   .btn-outline-dashed:hover { transform: none; opacity: 1; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (min-width: 600px) {
+    .hero { padding: 60px 40px 40px; }
+    .hero-title { font-size: 3rem; }
+    .tabs { padding: 16px 20px 0; }
+    .section { padding: 20px 20px 40px; }
+    .choice-grid { grid-template-columns: 1fr 1fr; }
+  }
