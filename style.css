@@ -1,5 +1,3 @@
-/* ─── GOOGLE FONTS — Heebo (Hebrew) ─── */
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap');
 
 :root {
   /* Core palette */
@@ -291,7 +289,7 @@ button:hover, .tab-btn:hover, .map-area-btn:hover, .map-cat-btn:hover,
 #schedule.section.active  { background: #ffffff; }
 #bookings.section.active  { background: #f8f9fb; }
 #places.section.active    { background: #ffffff; }
-#map.section.active       { background: #f8f9fb; }
+#map.section.active { direction: ltr;  background: #f8f9fb; }
 #guide.section.active     { background: #ffffff; }
 #missing.section.active   { background: #f8f9fb; }
 
