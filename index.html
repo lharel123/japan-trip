@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#0a0e1a">
+<meta name="theme-color" content="#1a1a2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>🗾 מסלול יפן 2026</title>
 <link rel="manifest" href="manifest.json" id="manifest-link">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="style.css">
@@ -46,7 +49,7 @@ window.ENCRYPTED_SALT = "5f095c7cf78ab781572c59948fb9a51a";
     <div class="section-title">📋 חסר לנו — מה עוד צריך לסדר</div>
 
     <!-- SECTION A: TRANSPORTATION -->
-    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(59,130,246,0.25);border-right:4px solid #3b82f6;padding:18px;margin-bottom:16px">
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(59,130,246,0.25);border-top:4px solid #3b82f6;padding:18px;margin-bottom:16px">
       <div style="font-size:16px;font-weight:700;color:#60a5fa;margin-bottom:14px">🚄 תחבורה</div>
 
       <!-- JR Pass -->
@@ -114,7 +117,7 @@ window.ENCRYPTED_SALT = "5f095c7cf78ab781572c59948fb9a51a";
     </div>
 
     <!-- SECTION B: RESTAURANTS -->
-    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(249,115,22,0.25);border-right:4px solid #f97316;padding:18px;margin-bottom:16px">
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(249,115,22,0.25);border-top:4px solid #f97316;padding:18px;margin-bottom:16px">
       <div style="font-size:16px;font-weight:700;color:#fb923c;margin-bottom:14px">🍽️ מסעדות שצריך להזמין מראש</div>
 
       <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;padding:8px 10px;background:rgba(249,115,22,0.06);border-radius:8px">📞 כלים להזמנה: <a href="https://pocket-concierge.jp/en" target="_blank" style="color:#fb923c">Pocket Concierge</a> · <a href="https://tableall.com" target="_blank" style="color:#fb923c">Tableall</a> · <a href="https://www.omakase.jp" target="_blank" style="color:#fb923c">Omakase.jp</a></div>
@@ -188,7 +191,7 @@ window.ENCRYPTED_SALT = "5f095c7cf78ab781572c59948fb9a51a";
     </div>
 
     <!-- SECTION C: TICKETS -->
-    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(139,92,246,0.25);border-right:4px solid #8b5cf6;padding:18px;margin-bottom:16px">
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(139,92,246,0.25);border-top:4px solid #8b5cf6;padding:18px;margin-bottom:16px">
       <div style="font-size:16px;font-weight:700;color:#a78bfa;margin-bottom:14px">🎟️ כרטיסים וחוויות שצריך להזמין</div>
 
       <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px;margin-bottom:10px">
@@ -249,7 +252,7 @@ window.ENCRYPTED_SALT = "5f095c7cf78ab781572c59948fb9a51a";
     </div>
 
     <!-- SECTION D: PRE-TRIP CHECKLIST -->
-    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(34,197,94,0.25);border-right:4px solid #22c55e;padding:18px;margin-bottom:16px">
+    <div style="background:var(--card);border-radius:var(--radius);border:1px solid rgba(34,197,94,0.25);border-top:4px solid #22c55e;padding:18px;margin-bottom:16px">
       <div style="font-size:16px;font-weight:700;color:#4ade80;margin-bottom:14px">📱 לפני הנסיעה — רשימת עשה</div>
 
       <div id="missing-checklist" style="display:grid;gap:8px">
