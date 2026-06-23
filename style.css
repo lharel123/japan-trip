@@ -310,7 +310,7 @@ button:hover, .tab-btn:hover, .map-area-btn:hover, .map-cat-btn:hover,
   box-shadow: 0 4px 24px rgba(0,0,0,0.14);
   border: 1px solid var(--border);
 }
-#leaflet-map, #map-el { height: 70vh; min-height: 600px; }
+#leaflet-map, #map-el { height: 70vh !important; min-height: 400px; direction: ltr; }
 .map-buttons {
   display: flex; gap: 8px; justify-content: center; margin-bottom: 16px;
 }

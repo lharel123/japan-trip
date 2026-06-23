@@ -67,7 +67,7 @@ function showSection(id, btn) {
   btn.classList.add('active');
   window.scrollTo({top: 0, behavior: 'smooth'});
   setTimeout(observeCards, 100);
-  if (id === 'map') setTimeout(tryInitMap, 200);
+  if (id === 'map') setTimeout(tryInitMap, 350);
 }
 
 function toggleDay(header) {
