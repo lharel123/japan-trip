@@ -727,3 +727,7 @@ button:hover, .tab-btn:hover, .map-area-btn:hover, .map-cat-btn:hover,
   .section { padding: 20px 20px 40px; }
   .choice-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ─── MUST-BADGE & SHOP-CALLOUT ─── */
+.must-badge { background: #e8527a; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-right: 6px; vertical-align: middle; }
+.shop-callout { background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.25); border-radius: 10px; padding: 10px 14px; margin-top: 12px; font-size: 13px; color: #7c3aed; direction: rtl; }
