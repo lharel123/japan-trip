@@ -214,6 +214,7 @@ body {
 #map.section.active       { direction: ltr; background: var(--surface2); }
 #guide.section.active     { background: var(--washi); }
 #missing.section.active   { background: var(--surface2); }
+#budget.section.active    { background: var(--washi); }
 
 .section-title {
   font-family: 'Rubik', sans-serif;

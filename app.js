@@ -838,9 +838,11 @@ function bDeleteExpense(id) {
   bRender();
 }
 
-// Call bRender whenever budget tab becomes active
-const _origShowSection = showSection;
-function showSection(id, btn) {
-  _origShowSection(id, btn);
-  if (id === 'budget') bRender();
-}
+// Patch showSection to call bRender when budget tab opens
+(function() {
+  var _orig = showSection;
+  showSection = function(id, btn) {
+    _orig(id, btn);
+    if (id === 'budget') setTimeout(bRender, 0);
+  };
+})();
