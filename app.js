@@ -528,25 +528,47 @@ let userMarker = null;
 let geoWatchId = null;
 
 function startGeolocation() {
+  const dbg = document.getElementById('geo-debug');
+  function log(msg) { if (dbg) dbg.textContent = msg; console.log('[GEO]', msg); }
+
   if (!navigator.geolocation) {
-    setGeoBtn('unsupported'); return;
+    setGeoBtn('unsupported');
+    log('geolocation API לא נתמך בדפדפן זה');
+    return;
   }
-  if (geoWatchId !== null) return; // already running
+  if (geoWatchId !== null) {
+    log('כבר פעיל, watchId=' + geoWatchId);
+    return;
+  }
+
+  log('מבקש מיקום...');
   setGeoBtn('loading');
+
+  // Check permission state first if API available
+  if (navigator.permissions) {
+    navigator.permissions.query({name: 'geolocation'}).then(result => {
+      log('הרשאה: ' + result.state);
+    }).catch(() => {});
+  }
+
   geoWatchId = navigator.geolocation.watchPosition(
     pos => {
       userLat = pos.coords.latitude;
       userLng = pos.coords.longitude;
       setGeoBtn('active');
+      log('מיקום: ' + userLat.toFixed(4) + ', ' + userLng.toFixed(4));
       updateUserMarker();
       updateNearbyList();
     },
     err => {
+      const msgs = { 1: 'נדחה — שנה הרשאה בהגדרות Chrome', 2: 'מיקום לא זמין', 3: 'timeout' };
+      log('שגיאה ' + err.code + ': ' + (msgs[err.code] || err.message));
       setGeoBtn('denied');
       geoWatchId = null;
     },
-    { enableHighAccuracy: true, maximumAge: 30000, timeout: 15000 }
+    { enableHighAccuracy: false, maximumAge: 60000, timeout: 20000 }
   );
+  log('watchPosition נשלח (id=' + geoWatchId + ')');
 }
 
 function setGeoBtn(state) {
