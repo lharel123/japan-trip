@@ -412,7 +412,7 @@ function initLeafletMap() {
   if (leafletMap) { leafletMap.invalidateSize(); return; }
   if (typeof L === 'undefined') { setTimeout(initLeafletMap, 300); return; }
 
-  leafletMap = L.map('leaflet-map', { zoomControl: true }).setView([35.6595, 139.7005], 13);
+  leafletMap = L.map('leaflet-map', { zoomControl: true, tap: false, tapTolerance: 15 }).setView([35.6595, 139.7005], 13);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
     maxZoom: 20
