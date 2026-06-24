@@ -812,3 +812,15 @@ button:hover, .tab-btn:hover, .map-area-btn:hover, .map-cat-btn:hover,
   color: var(--gold); font-weight: 700; font-size: 16px;
   text-decoration: none; padding: 4px;
 }
+
+/* ─── GEO TOGGLE BUTTON ─── */
+.geo-toggle-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 20px; border: 1.5px solid var(--border);
+  font-family: 'Heebo', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 120ms; background: var(--surface);
+  color: var(--text2); direction: rtl;
+}
+.geo-toggle-btn.loading { border-color: #cbd5e1; color: var(--muted); }
+.geo-toggle-btn.active  { border-color: #2979ff; color: #2979ff; background: rgba(41,121,255,0.08); }
+.geo-toggle-btn.denied  { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }

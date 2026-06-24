@@ -529,17 +529,39 @@ let userMarker = null;
 let geoWatchId = null;
 
 function startGeolocation() {
-  if (!navigator.geolocation) return;
+  if (!navigator.geolocation) {
+    setGeoBtn('unsupported'); return;
+  }
+  if (geoWatchId !== null) return; // already running
+  setGeoBtn('loading');
   geoWatchId = navigator.geolocation.watchPosition(
     pos => {
       userLat = pos.coords.latitude;
       userLng = pos.coords.longitude;
+      setGeoBtn('active');
       updateUserMarker();
       updateNearbyList();
     },
-    null,
+    err => {
+      setGeoBtn('denied');
+      geoWatchId = null;
+    },
     { enableHighAccuracy: true, maximumAge: 30000, timeout: 15000 }
   );
+}
+
+function setGeoBtn(state) {
+  const btn = document.getElementById('geo-btn');
+  if (!btn) return;
+  const states = {
+    loading:     { text: '📍 מאתר מיקום...', cls: 'loading' },
+    active:      { text: '🔵 מיקום פעיל',   cls: 'active' },
+    denied:      { text: '📍 אפשר מיקום',   cls: 'denied' },
+    unsupported: { text: '📍 לא נתמך',       cls: 'denied' },
+  };
+  const s = states[state] || states.denied;
+  btn.textContent = s.text;
+  btn.className = 'geo-toggle-btn ' + s.cls;
 }
 
 function stopGeolocation() {
