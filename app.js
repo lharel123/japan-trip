@@ -635,18 +635,37 @@ function updateNearbyList() {
 
   el.innerHTML = withDist.map(p => {
     const km = p.dist < 1
-      ? Math.round(p.dist * 1000) + ' מ\''
+      ? Math.round(p.dist * 1000) + " מ'"
       : p.dist.toFixed(1) + ' ק"מ';
     const mapsUrl = 'https://maps.google.com/search?q=' + encodeURIComponent(p.query || p.place);
-    return `<div class="nearby-item" onclick="flyTo(${p.coords[0]},${p.coords[1]},17,null)">
-      <div class="nearby-dist">${km}</div>
-      <div class="nearby-info">
-        <div class="nearby-name">${p.place}</div>
-        <div class="nearby-cat">${p.cat.split(' & ')[0].split(' ')[0]}</div>
-      </div>
-      <a class="nearby-maps" href="${mapsUrl}" target="_blank" onclick="event.stopPropagation()">↗</a>
-    </div>`;
+    return '<div class="nearby-item" onclick="flyToAndShow(' + p.coords[0] + ',' + p.coords[1] + ',17)">' +
+      '<div class="nearby-dist">' + km + '</div>' +
+      '<div class="nearby-info">' +
+        '<div class="nearby-name">' + p.place + '</div>' +
+        '<div class="nearby-cat">' + p.cat.split(' & ')[0].split(' ')[0] + '</div>' +
+      '</div>' +
+      '<a class="nearby-maps" href="' + mapsUrl + '" target="_blank" onclick="event.stopPropagation()">↗</a>' +
+    '</div>';
   }).join('');
+}
+
+function flyToAndShow(lat, lng, zoom) {
+  const mapSection = document.getElementById('map');
+  const mapTab = document.querySelector('.tab-btn[onclick*="map"]');
+  if (mapSection && !mapSection.classList.contains('active')) {
+    if (mapTab) showSection('map', mapTab);
+    setTimeout(function() { flyTo(lat, lng, zoom, null); }, 450);
+  } else {
+    flyTo(lat, lng, zoom, null);
+  }
+}
+
+function haversineDist(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 
 // Stop on page leave
