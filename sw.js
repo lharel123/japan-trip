@@ -1,4 +1,4 @@
-const CACHE = 'japan-v9';
+const CACHE = 'japan-v10';
 const ASSETS = [
   './',
   './index.html',

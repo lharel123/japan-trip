@@ -671,3 +671,176 @@ function haversineDist(lat1, lng1, lat2, lng2) {
 // Stop on page leave
 window.addEventListener('pagehide', stopGeolocation);
 window.addEventListener('beforeunload', stopGeolocation);
+
+// ═══════════════════════════════════════════
+// BUDGET TRACKER — ליאור & ליהי
+// ═══════════════════════════════════════════
+
+const B_STORAGE = 'japan_budget_v1';
+const B_RATES_KEY = 'japan_brates_v1';
+
+let bDisplayCurrency = 'JPY';
+let bSelectedPayer   = 'lior';
+let bSelectedCat     = 'food';
+let bRates = { USD_TO_JPY: 155, ILS_TO_JPY: 42 };
+
+const B_CAT_ICONS   = { food:'🍜', transport:'🚅', hotel:'🏨', activity:'🎫', shopping:'🛍️', flight:'✈️', other:'📦' };
+const B_CAT_LABELS  = { food:'אוכל', transport:'תחבורה', hotel:'מלון', activity:'אטרקציה', shopping:'קניות', flight:'טיסה', other:'אחר' };
+const B_CAT_COLORS  = { food:'#f9e5cc', transport:'#cce0f9', hotel:'#ccf0dd', activity:'#f9cce7', shopping:'#e5ccf9', flight:'#f9f9cc', other:'#e8e4db' };
+
+function bLoadExpenses() {
+  try { return JSON.parse(localStorage.getItem(B_STORAGE)) || []; } catch { return []; }
+}
+function bSaveAll(arr) { localStorage.setItem(B_STORAGE, JSON.stringify(arr)); }
+
+function bToJPY(amount, currency) {
+  if (currency === 'JPY') return amount;
+  if (currency === 'USD') return amount * bRates.USD_TO_JPY;
+  if (currency === 'ILS') return amount * bRates.ILS_TO_JPY;
+  return amount;
+}
+
+function bFmt(jpy) {
+  const n = Math.round(Math.abs(jpy));
+  if (bDisplayCurrency === 'JPY') return '¥' + n.toLocaleString('en');
+  if (bDisplayCurrency === 'ILS') return '₪' + Math.round(jpy / bRates.ILS_TO_JPY).toLocaleString('en');
+  if (bDisplayCurrency === 'USD') return '$' + Math.round(jpy / bRates.USD_TO_JPY).toLocaleString('en');
+  return jpy;
+}
+
+function setBudgetCurrency(curr, btn) {
+  bDisplayCurrency = curr;
+  document.querySelectorAll('.budget-curr-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  bRender();
+}
+
+function bRender() {
+  const expenses = bLoadExpenses();
+  const liorJPY  = expenses.filter(e => e.payer === 'lior').reduce((s,e) => s + e.amountJPY, 0);
+  const lihiJPY  = expenses.filter(e => e.payer === 'lihi').reduce((s,e) => s + e.amountJPY, 0);
+  const totalJPY = liorJPY + lihiJPY;
+
+  // Stats
+  const tEl = document.getElementById('b-total');
+  const lEl = document.getElementById('b-lior-total');
+  const hEl = document.getElementById('b-lihi-total');
+  if (tEl) tEl.textContent = bFmt(totalJPY);
+  if (lEl) lEl.textContent = bFmt(liorJPY);
+  if (hEl) hEl.textContent = bFmt(lihiJPY);
+
+  // Settlement
+  const bar  = document.getElementById('b-bar');
+  const text = document.getElementById('b-settlement-text');
+  const sub  = document.getElementById('b-settlement-sub');
+  if (bar && text && sub) {
+    if (totalJPY === 0) {
+      bar.style.width = '50%'; bar.className = 'b-settlement-bar';
+      text.innerHTML = '<span class="b-settlement-equal">מאזן שקול ✓</span>';
+      sub.textContent = 'הוסף הוצאות כדי לראות מי חייב למי';
+    } else {
+      const diff = liorJPY - lihiJPY;
+      const owed = Math.abs(diff) / 2;
+      if (Math.abs(diff) < 1) {
+        bar.style.width = '50%'; bar.className = 'b-settlement-bar';
+        text.innerHTML = '<span class="b-settlement-equal">מאזן שקול ✓</span>';
+        sub.textContent = 'שניהם שילמו ' + bFmt(totalJPY / 2) + ' כל אחד';
+      } else if (diff > 0) {
+        bar.style.width = ((liorJPY / totalJPY) * 100) + '%';
+        bar.className = 'b-settlement-bar';
+        text.innerHTML = '<span class="b-name-lihi">ליהי</span> חייבת ל<span class="b-name-lior">ליאור</span> <span class="b-amount-big">' + bFmt(owed) + '</span>';
+        sub.textContent = 'ליאור שילם ' + bFmt(liorJPY) + ' · ליהי שילמה ' + bFmt(lihiJPY);
+      } else {
+        bar.style.width = ((lihiJPY / totalJPY) * 100) + '%';
+        bar.className = 'b-settlement-bar lihi-more';
+        text.innerHTML = '<span class="b-name-lior">ליאור</span> חייב ל<span class="b-name-lihi">ליהי</span> <span class="b-amount-big">' + bFmt(owed) + '</span>';
+        sub.textContent = 'ליאור שילם ' + bFmt(liorJPY) + ' · ליהי שילמה ' + bFmt(lihiJPY);
+      }
+    }
+  }
+
+  // Expense list
+  const list = document.getElementById('b-expense-list');
+  if (!list) return;
+  if (expenses.length === 0) {
+    list.innerHTML = '<div class="b-empty"><span class="b-emoji">💴</span>עדיין אין הוצאות</div>';
+    return;
+  }
+  const sorted = [...expenses].sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
+  list.innerHTML = sorted.map(e => {
+    const isLior = e.payer === 'lior';
+    return '<div class="b-expense-item">' +
+      '<div class="b-exp-icon" style="background:' + (B_CAT_COLORS[e.cat]||'#e8e4db') + '">' + (B_CAT_ICONS[e.cat]||'📦') + '</div>' +
+      '<div class="b-exp-info">' +
+        '<div class="b-exp-desc">' + (e.desc || B_CAT_LABELS[e.cat]) + '</div>' +
+        '<div class="b-exp-meta"><span class="b-payer-tag ' + (isLior?'lior':'lihi') + '">' + (isLior?'ליאור':'ליהי') + '</span></div>' +
+      '</div>' +
+      '<div class="b-exp-amount ' + (isLior?'lior-c':'lihi-c') + '">' + bFmt(e.amountJPY) + '</div>' +
+      '<button class="b-del-btn" onclick="bDeleteExpense(\'' + e.id + '\')">✕</button>' +
+    '</div>';
+  }).join('');
+}
+
+function openBudgetForm() {
+  const wrap = document.getElementById('b-form-wrap');
+  if (!wrap) return;
+  wrap.style.display = 'block';
+  document.getElementById('b-desc').value = '';
+  document.getElementById('b-amount').value = '';
+  document.getElementById('b-form-curr').value = bDisplayCurrency;
+  bSelectPayer('lior');
+  document.querySelectorAll('.b-cat-btn').forEach(b => b.classList.remove('active'));
+  const firstCat = document.querySelector('.b-cat-btn');
+  if (firstCat) { firstCat.classList.add('active'); bSelectedCat = firstCat.dataset.bcat; }
+  setTimeout(() => document.getElementById('b-desc') && document.getElementById('b-desc').focus(), 100);
+}
+
+function closeBudgetForm() {
+  const wrap = document.getElementById('b-form-wrap');
+  if (wrap) wrap.style.display = 'none';
+}
+
+function bSelectPayer(p) {
+  bSelectedPayer = p;
+  const bl = document.getElementById('b-btn-lior');
+  const bh = document.getElementById('b-btn-lihi');
+  if (bl) bl.className = 'b-payer-btn' + (p === 'lior' ? ' sel-lior' : '');
+  if (bh) bh.className = 'b-payer-btn' + (p === 'lihi' ? ' sel-lihi' : '');
+}
+
+function bSelectCat(btn) {
+  document.querySelectorAll('.b-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  bSelectedCat = btn.dataset.bcat;
+}
+
+function bSaveExpense() {
+  const desc   = (document.getElementById('b-desc').value || '').trim();
+  const amount = parseFloat(document.getElementById('b-amount').value);
+  const curr   = document.getElementById('b-form-curr').value;
+  if (!amount || amount <= 0) { document.getElementById('b-amount').focus(); return; }
+  const amountJPY = Math.round(bToJPY(amount, curr));
+  const expenses  = bLoadExpenses();
+  expenses.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+    desc, cat: bSelectedCat, payer: bSelectedPayer,
+    amountJPY, originalAmount: amount, originalCurrency: curr,
+    createdAt: Date.now(),
+  });
+  bSaveAll(expenses);
+  closeBudgetForm();
+  bRender();
+}
+
+function bDeleteExpense(id) {
+  if (!confirm('למחוק הוצאה זו?')) return;
+  bSaveAll(bLoadExpenses().filter(e => e.id !== id));
+  bRender();
+}
+
+// Call bRender whenever budget tab becomes active
+const _origShowSection = showSection;
+function showSection(id, btn) {
+  _origShowSection(id, btn);
+  if (id === 'budget') bRender();
+}
