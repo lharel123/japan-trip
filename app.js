@@ -44,6 +44,7 @@ function unlock() {
   if (typeof renderPlaces === 'function' && placesData.length > 0) renderPlaces();
   if (typeof fetchWeather === 'function') fetchWeather();
   if (typeof initLY091Polling === 'function') initLY091Polling();
+  startGeolocation();
 }
 
 (async function autoUnlock() {
@@ -436,6 +437,10 @@ function initLeafletMap() {
     marker.addTo(leafletMap);
     allMarkers.push(marker);
   });
+
+  // Show user location if already available
+  updateUserMarker();
+  updateNearbyList();
 }
 
 function flyTo(lat, lng, zoom, btn) {
@@ -513,3 +518,94 @@ function toggleMissingCheck(item) {
     }
   }
 }
+
+// ═══════════════════════════════════════════
+// GEOLOCATION — show user position on map
+// Starts on unlock, stops on page leave
+// ═══════════════════════════════════════════
+
+let userLat = null, userLng = null;
+let userMarker = null;
+let geoWatchId = null;
+
+function startGeolocation() {
+  if (!navigator.geolocation) return;
+  geoWatchId = navigator.geolocation.watchPosition(
+    pos => {
+      userLat = pos.coords.latitude;
+      userLng = pos.coords.longitude;
+      updateUserMarker();
+      updateNearbyList();
+    },
+    null,
+    { enableHighAccuracy: true, maximumAge: 30000, timeout: 15000 }
+  );
+}
+
+function stopGeolocation() {
+  if (geoWatchId !== null) {
+    navigator.geolocation.clearWatch(geoWatchId);
+    geoWatchId = null;
+  }
+  if (userMarker && leafletMap) {
+    leafletMap.removeLayer(userMarker);
+    userMarker = null;
+  }
+  userLat = null; userLng = null;
+}
+
+function updateUserMarker() {
+  if (!leafletMap || userLat === null) return;
+  if (userMarker) {
+    userMarker.setLatLng([userLat, userLng]);
+  } else {
+    const icon = L.divIcon({
+      className: '',
+      html: '<div class="geo-dot"><div class="geo-pulse"></div></div>',
+      iconSize: [20, 20],
+      iconAnchor: [10, 10]
+    });
+    userMarker = L.marker([userLat, userLng], { icon, zIndexOffset: 1000 })
+      .addTo(leafletMap)
+      .bindPopup('<div style="text-align:center;font-weight:700;font-family:Heebo,sans-serif">📍 המיקום שלי</div>');
+  }
+  updateNearbyList();
+}
+
+function haversineDist(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function updateNearbyList() {
+  const el = document.getElementById('nearby-list');
+  if (!el || userLat === null || !placesData.length) return;
+
+  const withDist = placesData.map(p => {
+    const coords = findCoords(p.place);
+    if (!coords) return null;
+    return { ...p, coords, dist: haversineDist(userLat, userLng, coords[0], coords[1]) };
+  }).filter(Boolean).sort((a, b) => a.dist - b.dist).slice(0, 6);
+
+  el.innerHTML = withDist.map(p => {
+    const km = p.dist < 1
+      ? Math.round(p.dist * 1000) + ' מ\''
+      : p.dist.toFixed(1) + ' ק"מ';
+    const mapsUrl = 'https://maps.google.com/search?q=' + encodeURIComponent(p.query || p.place);
+    return `<div class="nearby-item" onclick="flyTo(${p.coords[0]},${p.coords[1]},17,null)">
+      <div class="nearby-dist">${km}</div>
+      <div class="nearby-info">
+        <div class="nearby-name">${p.place}</div>
+        <div class="nearby-cat">${p.cat.split(' & ')[0].split(' ')[0]}</div>
+      </div>
+      <a class="nearby-maps" href="${mapsUrl}" target="_blank" onclick="event.stopPropagation()">↗</a>
+    </div>`;
+  }).join('');
+}
+
+// Stop on page leave
+window.addEventListener('pagehide', stopGeolocation);
+window.addEventListener('beforeunload', stopGeolocation);

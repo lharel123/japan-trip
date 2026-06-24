@@ -747,3 +747,68 @@ button:hover, .tab-btn:hover, .map-area-btn:hover, .map-cat-btn:hover,
   .section { padding: 20px 20px 40px; }
   .choice-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ─── GEO LOCATION DOT ─── */
+.geo-dot {
+  width: 18px; height: 18px;
+  background: #2979ff;
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.geo-pulse {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(41,121,255,0.25);
+  animation: geoPulse 2s infinite;
+}
+@keyframes geoPulse {
+  0%   { transform: translate(-50%,-50%) scale(0.5); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(2);   opacity: 0; }
+}
+
+/* ─── NEARBY LIST ─── */
+#nearby-list-wrap {
+  margin-top: 14px;
+  direction: rtl;
+}
+#nearby-list-wrap h4 {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 8px 0;
+  display: flex; align-items: center; gap: 6px;
+}
+#nearby-list:empty::before {
+  content: 'ממתין למיקום...';
+  color: var(--muted); font-size: 13px; display: block; padding: 8px 0;
+}
+.nearby-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: background 120ms;
+  direction: rtl;
+}
+.nearby-item:hover { background: var(--gold-dim); }
+.nearby-dist {
+  font-size: 12px; font-weight: 700;
+  color: #2979ff; min-width: 44px; text-align: center;
+  background: rgba(41,121,255,0.1);
+  border-radius: 4px; padding: 2px 6px;
+}
+.nearby-info { flex: 1; min-width: 0; }
+.nearby-name { font-weight: 600; font-size: 14px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nearby-cat  { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.nearby-maps {
+  color: var(--gold); font-weight: 700; font-size: 16px;
+  text-decoration: none; padding: 4px;
+}
