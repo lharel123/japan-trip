@@ -44,7 +44,6 @@ function unlock() {
   if (typeof renderPlaces === 'function' && placesData.length > 0) renderPlaces();
   if (typeof fetchWeather === 'function') fetchWeather();
   if (typeof initLY091Polling === 'function') initLY091Polling();
-  startGeolocation();
 }
 
 (async function autoUnlock() {
