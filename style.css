@@ -653,35 +653,37 @@ button:focus-visible { outline: 2px solid var(--shinkansen); outline-offset: 2px
   .choice-grid { grid-template-columns: 1fr 1fr; }
 }
 
+
 /* ═══════════════════════════════════════════
-   BUDGET TAB — Washi × Finance
+   BUDGET TAB — Washi × Finance (RTL-first)
+   Palette: washi #f0ede6 / sumi #1a1714 / 
+   lior-blue #1f4e79 / lihi-red #b5342a / gold #c9a84c
    ═══════════════════════════════════════════ */
 
 /* Currency row */
 .budget-curr-row {
-  display: flex; gap: 6px; margin: 14px 0 12px;
+  display: flex; gap: 6px; margin: 12px 0 10px;
 }
 .budget-curr-btn {
   flex: 1; padding: 8px 0;
-  border: 1.5px solid var(--border);
-  background: var(--card); border-radius: 6px;
-  color: var(--muted); font-family: 'Rubik', sans-serif;
+  border: 1.5px solid #ddd9d0;
+  background: #ffffff; border-radius: 6px;
+  color: #8a8278; font-family: 'Rubik', sans-serif;
   font-size: 13px; font-weight: 700; cursor: pointer;
   transition: all 120ms; letter-spacing: 0.03em;
 }
 .budget-curr-btn.active {
-  background: var(--gold); border-color: var(--gold);
-  color: var(--bg);
+  background: #c9a84c; border-color: #c9a84c; color: #1a1714;
 }
 
 /* Settlement card */
 .budget-settlement {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-  margin-bottom: 10px;
+  background: #ffffff; border: 1px solid #ddd9d0;
+  border-radius: 6px; overflow: hidden; margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
 }
 .b-settlement-bar-wrap {
-  height: 5px; background: var(--border); position: relative;
+  height: 5px; background: #ddd9d0; position: relative;
 }
 .b-settlement-bar {
   height: 100%; position: absolute; right: 0; top: 0;
@@ -690,45 +692,46 @@ button:focus-visible { outline: 2px solid var(--shinkansen); outline-offset: 2px
 .b-settlement-bar.lihi-more {
   right: auto; left: 0; background: #b5342a;
 }
-.b-settlement-body {
-  padding: 12px 14px;
-}
+.b-settlement-body { padding: 12px 14px; }
 .b-settlement-label {
   font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
-}
-.b-settlement-text {
-  font-family: 'Rubik', sans-serif; font-size: 17px;
-  font-weight: 900; letter-spacing: -0.02em; line-height: 1.2;
+  text-transform: uppercase; color: #8a8278; margin-bottom: 5px;
 }
 .b-settlement-equal {
   color: #2d7a4a; font-family: 'Rubik', sans-serif;
   font-size: 16px; font-weight: 700;
 }
-.b-settlement-sub {
-  font-size: 11px; color: var(--muted); margin-top: 3px;
-}
+.b-settlement-sub { font-size: 11px; color: #8a8278; margin-top: 3px; }
 .b-name-lior { color: #1f4e79; }
 .b-name-lihi { color: #b5342a; }
-.b-amount-big { font-size: 22px; }
+.b-amount-big {
+  font-family: 'Rubik', sans-serif; font-size: 20px;
+  font-weight: 900; letter-spacing: -0.02em;
+}
+#b-settlement-text {
+  font-family: 'Rubik', sans-serif; font-size: 16px;
+  font-weight: 900; letter-spacing: -0.02em; color: #1a1714;
+  line-height: 1.3;
+}
 
 /* Stats row */
 .b-stats {
   display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px; margin-bottom: 16px;
+  gap: 8px; margin-bottom: 14px;
 }
 .b-stat-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 10px 12px;
+  background: #ffffff; border: 1px solid #ddd9d0;
+  border-radius: 6px; padding: 10px 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .b-stat-label {
   font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+  text-transform: uppercase; color: #8a8278; margin-bottom: 4px;
 }
 .b-stat-val {
-  font-family: 'Rubik', sans-serif; font-size: 16px;
+  font-family: 'Rubik', sans-serif; font-size: 15px;
   font-weight: 900; letter-spacing: -0.02em;
-  direction: ltr; text-align: left;
+  direction: ltr; text-align: left; color: #1a1714;
 }
 .b-lior-val { color: #1f4e79; }
 .b-lihi-val { color: #b5342a; }
@@ -740,25 +743,26 @@ button:focus-visible { outline: 2px solid var(--shinkansen); outline-offset: 2px
 }
 .b-list-hdr-title {
   font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--muted);
+  text-transform: uppercase; color: #8a8278;
 }
 .b-add-btn {
-  background: var(--sumi, #1a1714); color: #fff;
+  background: #1a1714; color: #ffffff;
   border: none; border-radius: 6px;
-  padding: 6px 14px; font-family: 'Rubik', sans-serif;
+  padding: 7px 16px; font-family: 'Rubik', sans-serif;
   font-size: 13px; font-weight: 700; cursor: pointer;
   transition: opacity 120ms;
 }
-.b-add-btn:hover { opacity: 0.85; }
+.b-add-btn:hover { opacity: 0.82; }
 
-/* Expense items */
+/* Expense list */
 .b-expense-list {
-  display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;
+  display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px;
 }
 .b-expense-item {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 10px 12px;
+  background: #ffffff; border: 1px solid #ddd9d0;
+  border-radius: 6px; padding: 10px 12px;
   display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .b-exp-icon {
   width: 34px; height: 34px; border-radius: 6px;
@@ -767,12 +771,12 @@ button:focus-visible { outline: 2px solid var(--shinkansen); outline-offset: 2px
 }
 .b-exp-info { flex: 1; min-width: 0; }
 .b-exp-desc {
-  font-weight: 600; font-size: 13px; color: var(--text, #1a1714);
+  font-weight: 600; font-size: 13px; color: #1a1714;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .b-exp-meta {
-  font-size: 11px; color: var(--muted);
-  margin-top: 1px; display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: #8a8278;
+  margin-top: 1px; display: flex; align-items: center; gap: 5px;
 }
 .b-payer-tag {
   font-weight: 700; font-size: 10px; padding: 1px 5px; border-radius: 3px;
@@ -780,13 +784,14 @@ button:focus-visible { outline: 2px solid var(--shinkansen); outline-offset: 2px
 .b-payer-tag.lior { background: rgba(31,78,121,0.12); color: #1f4e79; }
 .b-payer-tag.lihi { background: rgba(181,52,42,0.12); color: #b5342a; }
 .b-exp-amount {
-  font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 900;
+  font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 900;
   direction: ltr; text-align: left; flex-shrink: 0;
+  letter-spacing: -0.01em;
 }
 .b-exp-amount.lior-c { color: #1f4e79; }
 .b-exp-amount.lihi-c { color: #b5342a; }
 .b-del-btn {
-  background: none; border: none; color: var(--border);
+  background: none; border: none; color: #ddd9d0;
   cursor: pointer; font-size: 14px; padding: 4px; flex-shrink: 0;
   transition: color 120ms;
 }
@@ -794,38 +799,39 @@ button:focus-visible { outline: 2px solid var(--shinkansen); outline-offset: 2px
 
 .b-empty {
   text-align: center; padding: 36px 16px;
-  color: var(--muted); font-size: 14px;
+  color: #8a8278; font-size: 14px;
 }
-.b-empty .b-emoji { font-size: 40px; display: block; margin-bottom: 10px; }
+.b-emoji { font-size: 40px; display: block; margin-bottom: 10px; }
 
 /* Add expense form */
 .b-form-wrap {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 16px; margin-bottom: 20px;
+  background: #ffffff; border: 1px solid #ddd9d0;
+  border-radius: 6px; padding: 16px; margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .b-form-title {
   font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 900;
-  margin-bottom: 14px; letter-spacing: -0.02em;
+  margin-bottom: 14px; letter-spacing: -0.02em; color: #1a1714;
 }
 .b-form-group { margin-bottom: 12px; }
 .b-form-label {
   display: block; font-size: 10px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 6px;
+  color: #8a8278; margin-bottom: 6px;
 }
 .b-form-input {
   width: 100%; padding: 10px 12px;
-  border: 1.5px solid var(--border); border-radius: 6px;
-  background: var(--surface, #fff); color: var(--text, #1a1714);
+  border: 1.5px solid #ddd9d0; border-radius: 6px;
+  background: #faf9f7; color: #1a1714;
   font-family: 'Heebo', sans-serif; font-size: 14px;
   outline: none; transition: border-color 120ms; direction: rtl;
 }
-.b-form-input:focus { border-color: var(--sumi, #1a1714); }
+.b-form-input:focus { border-color: #1a1714; }
 .b-payer-row { display: flex; gap: 8px; }
 .b-payer-btn {
   flex: 1; padding: 9px; border-radius: 6px;
-  border: 1.5px solid var(--border);
-  background: var(--surface, #fff); cursor: pointer;
+  border: 1.5px solid #ddd9d0;
+  background: #faf9f7; color: #3d3730; cursor: pointer;
   font-family: 'Heebo', sans-serif; font-size: 13px; font-weight: 700;
   transition: all 120ms; text-align: center;
 }
@@ -835,34 +841,36 @@ button:focus-visible { outline: 2px solid var(--shinkansen); outline-offset: 2px
 .b-payer-btn.sel-lihi {
   background: rgba(181,52,42,0.1); border-color: #b5342a; color: #b5342a;
 }
+.b-amount-row { display: flex; gap: 8px; }
 .b-curr-sel {
-  padding: 10px 12px; border: 1.5px solid var(--border);
-  border-radius: 6px; background: var(--surface, #fff);
-  color: var(--text, #1a1714); font-family: 'Rubik', sans-serif;
+  padding: 10px 10px; border: 1.5px solid #ddd9d0;
+  border-radius: 6px; background: #faf9f7;
+  color: #1a1714; font-family: 'Rubik', sans-serif;
   font-size: 13px; font-weight: 700; outline: none; cursor: pointer;
+  flex-shrink: 0;
 }
 .b-cat-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .b-cat-btn {
   width: 40px; height: 40px; border-radius: 8px;
-  border: 1.5px solid var(--border);
-  background: var(--surface, #fff); cursor: pointer;
+  border: 1.5px solid #ddd9d0;
+  background: #faf9f7; cursor: pointer;
   font-size: 18px; transition: all 120ms;
   display: flex; align-items: center; justify-content: center;
 }
 .b-cat-btn.active {
-  background: var(--sumi, #1a1714); border-color: var(--sumi, #1a1714);
+  background: #1a1714; border-color: #1a1714;
 }
-.b-form-btns { display: flex; gap: 8px; margin-top: 4px; }
+.b-form-btns { display: flex; gap: 8px; margin-top: 8px; }
 .b-save-btn {
-  flex: 1; padding: 12px; background: var(--sumi, #1a1714);
-  color: #fff; border: none; border-radius: 6px;
+  flex: 1; padding: 12px; background: #1a1714;
+  color: #ffffff; border: none; border-radius: 6px;
   font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 700;
   cursor: pointer; transition: opacity 120ms;
 }
-.b-save-btn:hover { opacity: 0.85; }
+.b-save-btn:hover { opacity: 0.82; }
 .b-cancel-btn {
   padding: 12px 16px; background: transparent;
-  color: var(--muted); border: 1.5px solid var(--border);
+  color: #8a8278; border: 1.5px solid #ddd9d0;
   border-radius: 6px; font-family: 'Heebo', sans-serif;
   font-size: 14px; cursor: pointer;
 }
