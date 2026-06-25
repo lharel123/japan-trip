@@ -838,11 +838,27 @@ function bDeleteExpense(id) {
   bRender();
 }
 
-// Patch showSection to call bRender when budget tab opens
+// Patch showSection: hide global hero/weather/tips for non-trip tabs (missing, budget)
 (function() {
   var _orig = showSection;
+  var GLOBAL_IDS  = ['booking-banner', 'weather-banner'];
+  var GLOBAL_SELS = ['.hero', '.tips-bar'];
+  var NON_TRIP    = ['missing', 'budget'];
+
   showSection = function(id, btn) {
     _orig(id, btn);
+
+    var hide = NON_TRIP.indexOf(id) !== -1;
+    GLOBAL_IDS.forEach(function(eid) {
+      var el = document.getElementById(eid);
+      if (el) el.style.display = hide ? 'none' : '';
+    });
+    GLOBAL_SELS.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) {
+        el.style.display = hide ? 'none' : '';
+      });
+    });
+
     if (id === 'budget') setTimeout(bRender, 0);
   };
 })();
