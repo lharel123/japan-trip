@@ -7,6 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap');
 
 :root {
+  color-scheme: light;
   /* ── Palette ── */
   --washi:    #f0ede6;   /* paper background */
   --washi2:   #e8e4db;   /* darker paper */
